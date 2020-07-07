@@ -127,8 +127,7 @@ for (itr=managersdata.iterator(); itr.hasNext(); )
 <input type = "checkbox"  value="empdata" name="emp" />EMP<br />
 <input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 <input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-<input type = "submit" value = "Show Table Data" />
-	
+<input type = "submit" value = "Show Table Data" />	
 <%} %>
 <%--End Managers CheckBox Code--%>
 </form><br />
