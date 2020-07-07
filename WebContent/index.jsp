@@ -18,7 +18,7 @@ body {
 <center>
 <h1 style="background-color:powderblue;color:red;">Welcome to Query Developer</h1>
 <h3 style="font-family:verdana;background-color:palegoldenrod;color:mediumaquamarine;font-size:150%;">Introduction</h3>
-<p style="font-family:courier;border-color: #FF0000 #00FF00 #0000FF #000000; border-style:solid;font-size:100%;">I have prepared this application for "First Time" learner or who have just wanted to start SQL learning.</p>
+<p style="font-family:courier;border-color: #FF0000 #00FF00 #0000FF #000000; border-style:dotted solid;font-size:100%;">I have prepared this application for "First Time" learner or who have just wanted to start SQL learning.</p>
 <p style="font-family:courier;border-color: #FF0000 #00FF00 #0000FF #000000; border-style:solid;font-size:100%;">
 This application is for those who don't know how to write query and what will be the output we will get,if we execute
 the query.</p>

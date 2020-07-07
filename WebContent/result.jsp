@@ -50,8 +50,9 @@ ArrayList managersdata= (ArrayList)request.getAttribute("managersdata");
 <% 
 if (empdata != null) {
 %>
-<p style="font-family:verdana;color:mediumaquamarine;">Query Used:</p>
-<table border="1" align="right" style="width:70%;"><tr><th>select * from emp order by empid;</th></tr></table>
+<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:120%;">Query Used To Select Table Record:</p>
+<p style="font-family:courier;color:orange red;font-size:120%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:70%;">
+select * from emp order by empid;</p>
 <br /><br />
 <table border="1" align="right" style="width:70%;">
 <tr><th>EMPLOYEE NUMBER</th><th>EMPLOYEE NAME</th><th>SALARY</th></tr>
@@ -82,7 +83,10 @@ for (itr=empdata.iterator(); itr.hasNext(); )
 <%
 //out.println(deptdata);
 if (deptdata != null) {
-%>	
+%>
+<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:120%;">Query Used To Select Table Record:</p>
+<p style="font-family:courier;color:orange red;font-size:120%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:70%;">
+select * from departments order by department_id;</p>	
 <table border="1" align="right" style="width:70%">
 <tr><th>Department ID</th><th>Depatment Name</th><th>Manager ID</th><th>Location ID</th></tr>
 <%Iterator itr;
@@ -110,6 +114,9 @@ for (itr=deptdata.iterator(); itr.hasNext(); )
 //out.println(managerdata);
 if (managersdata != null) {
 %>
+<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:120%;">Query Used To Select Table Record:</p>
+<p style="font-family:courier;color:orange red;font-size:120%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:70%;">
+select * from managers order by mngrid;</p>
 <table border="1" align="right" style="width:70%">
 <tr><th>Manager ID</th><th>Depatment Name</th><th>Salary</th></tr>
 <%Iterator itr;
