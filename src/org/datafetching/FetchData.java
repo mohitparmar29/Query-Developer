@@ -74,7 +74,7 @@ public class FetchData extends HttpServlet {
 			PreparedStatement ps3=null;
 			System.out.println("\n I am step 3");
 			
-			if (cstdata != null || insertdata != null || deletedata != null || droptable != null) 
+			if (cstdata != null || insertdata != null || deletedata != null || droptable != null || truncdata != null) 
 			{
 				/*if (cstdata != null) { al.add(cstdata); }
 				if (insertdata != null) { al.add(insertdata); }
@@ -97,6 +97,8 @@ public class FetchData extends HttpServlet {
 			System.out.println("\nand the deptdata is: " +deptdata);
 			System.out.println("\nand the managerstable is: " +managerstable);
 			System.out.println("\nand the managersdata is: " +managersdata);
+			System.out.println("\nand the truncdata is: " +truncdata);
+			System.out.println("\nand the tableFlag is: " +tableFlag);
 			System.out.println("\n I am line 100 Code");
 			
 			if (((emptable != null) && (depttable != null) && (managerstable != null)) ||
@@ -187,7 +189,7 @@ public class FetchData extends HttpServlet {
 			}
 			}
 			}//End of All the not null like emptable,depttable, managerstable and tableFlag =0 code
-			if (((emptable == null) && (depttable == null) && (managerstable == null)) && tableFlag == 0 && truncdata == null)
+			if (((emptable == null) && (depttable == null) && (managerstable == null)) && tableFlag == 0)
 			{
 				response.setContentType("text/html");
 				PrintWriter pw=response.getWriter();				

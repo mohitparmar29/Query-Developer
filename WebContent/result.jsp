@@ -139,7 +139,7 @@ for (itr=managersdata.iterator(); itr.hasNext(); )
 <%--End Managers CheckBox Code--%>
 </form><br />
 <form action="FetchData" method="post">
-<input type="submit" value="Truncate Table" name="trunc" disabled="disabled" />
+<input type="submit" value="Truncate Table" name="trunc"/>
 </form><br />
 <form action="index.jsp">
 <input type="submit" value="HOME" />
