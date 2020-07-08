@@ -35,7 +35,8 @@ if (tablelist != null) {
 <input type = "checkbox"  value="empdata" name="emp" /><%=tablelist.get(0)%><br />
 <input type = "checkbox"  value="deptdata" name="dept" /><%=tablelist.get(1)%><br />
 <input type = "checkbox"  value="managerdata" name="managers" /><%=tablelist.get(2)%><br /><br />
-<input type = "submit" value = "Show Table Data"  />
+<input type = "submit" value = "Show Table Data"  /><br /><br />
+<input type="submit" value="Truncate Table" name="trunc"/>
 <% 
 }
 //Array List creation for EMP , DEPT and Managers
@@ -75,7 +76,8 @@ for (itr=empdata.iterator(); itr.hasNext(); )
 <input type = "checkbox"  value="empdata" name="emp" />EMP<br />
 <input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 <input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-<input type = "submit" value = "Show Table Data" />
+<input type = "submit" value = "Show Table Data" /><br /><br />
+<input type="submit" value="Truncate Table" name="trunc"/>
 
 <%} %>
 <%--End EMP CheckBox Code--%>
@@ -105,7 +107,8 @@ for (itr=deptdata.iterator(); itr.hasNext(); )
 <input type = "checkbox"  value="empdata" name="emp" />EMP<br />
 <input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 <input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-<input type = "submit" value = "Show Table Data" />
+<input type = "submit" value = "Show Table Data" /><br /><br />
+<input type="submit" value="Truncate Table" name="trunc"/>
 
 <%} %>
 <%--End Department CheckBox Code--%>
@@ -134,13 +137,14 @@ for (itr=managersdata.iterator(); itr.hasNext(); )
 <input type = "checkbox"  value="empdata" name="emp" />EMP<br />
 <input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 <input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-<input type = "submit" value = "Show Table Data" />	
+<input type = "submit" value = "Show Table Data" /><br /><br />
+<input type="submit" value="Truncate Table" name="trunc"/>	
 <%} %>
 <%--End Managers CheckBox Code--%>
 </form><br />
-<form action="FetchData" method="post">
+<%--<form action="FetchData" method="post">
 <input type="submit" value="Truncate Table" name="trunc"/>
-</form><br />
+</form><br />--%>
 <form action="index.jsp">
 <input type="submit" value="HOME" />
 </form>
