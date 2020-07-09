@@ -42,7 +42,13 @@ public class FetchData extends HttpServlet {
 		    String[] empdata=request.getParameterValues("emp");
 		    String[] deptdata=request.getParameterValues("dept");
 		    String[] managersdata=request.getParameterValues("managers");
-		  //----------result.jsp-------------------------------- 
+		    //----------result.jsp-------------------------------- 
+		    //------------- truncatedetails.jsp-----------------------
+			String truncallrecord=request.getParameter("trunca");
+			//------------- truncatedetails.jsp-----------------------
+		    
+		    
+		    
 			//Print the above got values in console
 		    System.out.println("The Check and Select table is: " +cstdata);
 		    System.out.println("\n I am step 1");
@@ -55,6 +61,8 @@ public class FetchData extends HttpServlet {
 			PreparedStatement ps1=null;
 			PreparedStatement ps2=null;
 			PreparedStatement ps3=null;
+			PreparedStatement ps4=null;
+			PreparedStatement ps5=null;
 			System.out.println("\n I am step 3");
 			
 			if (truncdata == null)
@@ -76,6 +84,7 @@ public class FetchData extends HttpServlet {
 				System.out.println("\nand the managerstable is: " +managerstable);
 				System.out.println("\nand the managersdata is: " +managersdata);
 				System.out.println("\nand the truncdata is: " +truncdata);
+				
 				System.out.println("\nand the tableFlag is: " +tableFlag);
 				System.out.println("\n I am line 100 Code");
 			
@@ -131,7 +140,7 @@ public class FetchData extends HttpServlet {
 							if(deptdata.length > 0)
 							{//If checkbox is checked than assign it with true or 1       
 								System.out.println("\nand the chkSms is: " +deptdata);
-								ps2=conn.prepareStatement("select * from departments order by department_id");
+								ps2=conn.prepareStatement("select * from dept_new order by department_id");
 								Flag = 1;
 								deptFlag =1;
 							}
@@ -166,7 +175,8 @@ public class FetchData extends HttpServlet {
 					}
 				}//End of All the not null like emptable,depttable, managerstable and tableFlag =0 code
 					System.out.println("\n I am @ line 192");
-					if (((emptable == null) && (depttable == null) && (managerstable == null)) && tableFlag == 0)
+					System.out.println("\nand the truncallrecord is: " +truncallrecord);
+					if (((emptable == null) && (depttable == null) && (managerstable == null)) && tableFlag == 0 && truncallrecord == null)
 					{
 						response.setContentType("text/html");
 						System.out.println("\n I am @ line 196 Inside");
@@ -226,7 +236,7 @@ public class FetchData extends HttpServlet {
 							//out.println("</table></center></body></html>");
 							if (managersFlag ==1)
 							{
-								nextJSP = "/result.jsp";				  
+								nextJSP = "/shodata.jsp";				  
 								request.setAttribute("managersdata", dataList);
 								RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;
 								dispatcher.forward(request,response);
@@ -235,7 +245,7 @@ public class FetchData extends HttpServlet {
 							}//managersFlag ==1 closed here			
 							if (deptFlag ==1)
 							{
-								nextJSP = "/result.jsp";				  
+								nextJSP = "/shodata.jsp";				  
 								request.setAttribute("deptdata", dataList);
 								RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;							
 								dispatcher.forward(request,response);
@@ -244,7 +254,7 @@ public class FetchData extends HttpServlet {
 			
 							if (Flag ==1)
 							{
-								nextJSP = "/result.jsp";
+								nextJSP = "/shodata.jsp";
 								request.setAttribute("empdata", dataList);				  
 								RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;							
 								dispatcher.forward(request,response);
@@ -255,12 +265,13 @@ public class FetchData extends HttpServlet {
 			if (truncdata != null)
 			{
 				System.out.println("\nI am here in truncdata");
+				
 				if (((emptable != null) && (depttable != null) && (managerstable != null)) ||
 						((emptable != null) && (depttable != null)) ||
 						((depttable != null) && (managerstable != null)) ||
 						((emptable != null) && (managerstable != null)))   
 					{
-						System.out.println("\n Inside first IF");
+						System.out.println("\n Inside first IF 263");
 						response.setContentType("text/html");
 						PrintWriter pw=response.getWriter();
 						pw.println("<script type=\"text/javascript\">");
@@ -277,12 +288,11 @@ public class FetchData extends HttpServlet {
 						{
 							if ((emptable.trim()) != "empdata") 
 							{
-								System.out.println("\nand the empdata inside is: " +empdata);
-								System.out.println("\nand the empdata length inside is: " +empdata.length);
+								System.out.println("\nand the empdata inside is 280 : " +empdata);
+								System.out.println("\nand the empdata length inside is 281: " +empdata.length);
 							
 								if(empdata.length > 0)
-								{//If checkbox is checked than assign it with true or 1
-									System.out.println("\nand the chkSms is: " +empdata);
+								{//If checkbox is checked than assign it with true or 1									
 									ps1=conn.prepareStatement("select * from emp order by empid");
 									Flag = 1;
 									emptableFlag=1;
@@ -293,21 +303,16 @@ public class FetchData extends HttpServlet {
 								//Do Nothing
 							}
 						}
-					
-						System.out.println("\nand the depttable is: " +depttable);
-						System.out.println("\nand the deptdata is: " +deptdata);
-				
 						if (depttable != null) 
 						{
 							if ((depttable.trim()) != "deptdata") 
 							{
-								System.out.println("\nand the deptdata inside is: " +deptdata);
-								System.out.println("\nand the deptdata length inside is: " +deptdata.length);
+								System.out.println("\nand the deptdata inside 299 is: " +deptdata);
+								System.out.println("\nand the deptdata length inside 300 is: " +deptdata.length);
 					
 								if(deptdata.length > 0)
-								{//If checkbox is checked than assign it with true or 1       
-									System.out.println("\nand the chkSms is: " +deptdata);
-									ps2=conn.prepareStatement("select * from departments order by department_id");
+								{//If checkbox is checked than assign it with true or 1									
+									ps2=conn.prepareStatement("select * from dept_new order by department_id");
 									Flag = 1;
 									deptFlag =1;
 								}
@@ -316,19 +321,16 @@ public class FetchData extends HttpServlet {
 							{
 								//	Do Nothing
 							}
-						}
-						System.out.println("\nand the managerstable is: " +managerstable);
-						System.out.println("\nand the managersdata is: " +managersdata);
+						}						
 						if (managerstable != null) 
 						{
 							if ((managerstable.trim()) != "managersdata") 
 							{
-								System.out.println("\nand the managersdata inside is: " +managersdata);
-								System.out.println("\nand the managersdata length inside is: " +managersdata.length);
+								System.out.println("\nand the managersdata inside 318 is: " +managersdata);
+								System.out.println("\nand the managersdata length inside 319 is: " +managersdata.length);
 					
 								if(managersdata.length > 0)
-								{//If checkbox is checked than assign it with true or 1       
-									System.out.println("\nand the chkSms is: " +managersdata);
+								{//If checkbox is checked than assign it with true or 1									
 									ps3=conn.prepareStatement("select * from managers order by mngrid");
 									Flag = 1;
 									deptFlag =1;
@@ -341,11 +343,11 @@ public class FetchData extends HttpServlet {
 							}
 						}
 					}//End of All the not null like emptable,depttable, managerstable and tableFlag =0 code
-						System.out.println("\n I am @ line 192");
+						System.out.println("\n I am @ line 335");
 						if (((emptable == null) && (depttable == null) && (managerstable == null)) && tableFlag == 0)
 						{
 							response.setContentType("text/html");
-							System.out.println("\n I am @ line 196 Inside");
+							System.out.println("\n I am @ line 339 Inside");
 							PrintWriter pw=response.getWriter();				
 							pw.println("<script type=\"text/javascript\">");
 							pw.println("alert('Please select table');");
@@ -354,14 +356,14 @@ public class FetchData extends HttpServlet {
 							rd.include(request, response);
 						}//If any table not selected box closed here		
 							
-						System.out.println("\n I am at 246");
+						System.out.println("\n I am at 348");
 							if (tableFlag == 0)
 							{
 								if (depttable != null) 
-								{
-									System.out.println("\n I am at 252");			
+								{											
 									ResultSet rs2=ps2.executeQuery();
-									System.out.println("\n I am at 256");			
+									System.out.println("\n I am at 354");	
+									
 									while (rs2.next())
 									{
 											//Add records into data list
@@ -370,11 +372,12 @@ public class FetchData extends HttpServlet {
 										dataList.add(rs2.getString(3));
 										dataList.add(rs2.getString(4));
 									}// While rs2 closed here			
+									
 								}//depttable != null closed here
 				
 								if (emptable != null) 
 								{
-									System.out.println("\n I am at 200");
+									System.out.println("\n I am at 369");
 									ResultSet rs1=ps1.executeQuery();
 									while (rs1.next()) 
 									{
@@ -383,12 +386,13 @@ public class FetchData extends HttpServlet {
 										dataList.add(rs1.getString(2));
 										dataList.add(rs1.getString(3));
 									}//while loop rs1 closed here
+									
 								}// emptable != null closed here
 				
 								if (managerstable != null)
 								{
 					
-									System.out.println("\n I am at 249");					
+									System.out.println("\n I am at 384");					
 									ResultSet rs3=ps3.executeQuery();
 									while (rs3.next()) 
 									{		
@@ -397,12 +401,13 @@ public class FetchData extends HttpServlet {
 										dataList.add(rs3.getString(2));
 										dataList.add(rs3.getString(3));													
 									}// while rs3 closed here
+									
 								}// managerstable != null closed here
 				
 								//out.println("</table></center></body></html>");
 								if (managersFlag ==1)
 								{
-									nextJSP = "/result.jsp";				  
+									nextJSP = "/truncatedetails.jsp";				  
 									request.setAttribute("managersdata", dataList);
 									RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;
 									dispatcher.forward(request,response);
@@ -411,7 +416,7 @@ public class FetchData extends HttpServlet {
 								}//managersFlag ==1 closed here
 								if (deptFlag ==1)
 								{
-									nextJSP = "/result.jsp";				  
+									nextJSP = "/truncatedetails.jsp";				  
 									request.setAttribute("deptdata", dataList);
 									RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;							
 									dispatcher.forward(request,response);
@@ -420,19 +425,42 @@ public class FetchData extends HttpServlet {
 				
 								if (Flag ==1)
 								{
-									nextJSP = "/result.jsp";
+									nextJSP = "/truncatedetails.jsp";
 									request.setAttribute("empdata", dataList);				  
 									RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;							
 									dispatcher.forward(request,response);
 								}//Flag ==1 closed here
+								
 							}// tableFlag == 0 closed here line 192
-			}		//truncdata button code
-		} // Try box closed	
-		catch(Exception e) {
+							
+			}//End of truncate data button code
+			if (truncallrecord != null)
+			{
+				System.out.println("\nI am here in truncallrecord");				
+				ps4=conn.prepareStatement("truncate table managers");
+				ResultSet rs4=ps4.executeQuery();
+				response.setContentType("text/html");
+				System.out.println("\n I am @ line 441 Inside");
+				PrintWriter pw=response.getWriter();				
+				pw.println("<script type=\"text/javascript\">");
+				pw.println("alert('Records removed successfully');");
+				pw.println("</script>");
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+				rd.include(request, response);
+				
+				//nextJSP = "/index.jsp";
+				//RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;							
+				//dispatcher.forward(request,response);
+			}//End of truncallrecord button code	
+			
+		} // End of Try box closed
+		
+		catch(Exception e) 
+		{
 			e.printStackTrace();
 		}
 		
 		
-	}
+	}//End of doPost function
 
-}
+}//End of HttpServlet -FetchData Class

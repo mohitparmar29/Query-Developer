@@ -7,7 +7,7 @@
 		<meta charset="ISO-8859-1">
 		<title>HOME</title>
 	</head>
-	<body style='background-color: pink;'>
+	<body style='background-color: linen;'>
 		<form action="FetchData" method="post">
 			<center>
 				<h1 style="background-color:powderblue;color:red;">
