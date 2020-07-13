@@ -62,6 +62,12 @@
 						var cell3 = row.insertCell(2);
 						var cell4 = row.insertCell(3);
 						}
+				function deleteRow(r) {
+					  var i = r.parentNode.parentNode.rowIndex;
+					  document.getElementById("myTableEmp").deleteRow(i);
+					  document.getElementById("myTableDept").deleteRow(i);
+					  document.getElementById("myTableMang").deleteRow(i);
+					}
 					</script>
 					
 		<form action="FetchData" method="post">
@@ -114,7 +120,7 @@
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />				
-				<input type="submit" value="Insert Data into Table" name="insrt"/>
+				<input type="submit" value="Delete Data From Table" name="delte"/>
 
 			<%}%> <%--End EMP CheckBox Code--%>
 			<%--Start Department CheckBox Code--%>
@@ -157,7 +163,7 @@
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Insert Data into Table" name="insrt"/>
+				<input type="submit" value="Delete Data From Table" name="delte"/>
 
 			<%} %><%--End Department CheckBox Code--%>
 
@@ -167,19 +173,12 @@
 			if (managersdata != null)
 			{%>				
 					<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-					Query Used To Insert Data into Table:</p>
+					Query Used To Delete Data From Table:</p>
 				
 					<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
-					Insert into managers (MNGRID,DEPTNAME,SALARY) values(value of column1,value of column2,value of column3);</p>
+					Delete from managers;</p>
 					
-					<p style="display: inline-block;font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-					
-		Manager ID:<input type="text" name="managerid" id="managerid" /><br />
-					Department Name:<input type="text" name="deptname" id="deptname" /><br />
-							 Salary:<input type="text" name="salary" id="salary" /><br /><br />
-					
-					<input type="submit" name="addrowmngr" value="ADD ROW" onclick="AddRow()" /></p>
-					
+			
 					<table  id="myTableMang" align="right" style="width:70%"> 
 				
 						<tr><th>Manager ID</th><th>Depatment Name</th><th>Salary</th></tr>
@@ -189,9 +188,10 @@
 						{
 						%>
 							<tr>
-								<td width="40"><%=itr.next()%></td>
-								<td width="80"><%=itr.next()%></td>
-								<td width="68"><%=itr.next()%></td>
+								<td width="150"><%=itr.next()%></td>							
+								<td width="170"><%=itr.next()%></td>									
+								<td width="150"><%=itr.next()%></td>
+								<td><input type="button" value="Delete" onclick="deleteRow(this)" style="width:40"></td>
 							</tr>
 						<%}%>					
 					</table>
@@ -202,7 +202,7 @@
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />				
-				<input type="submit" value="Insert Data into Table" name="insrt"/>	
+				<input type="submit" value="Delete Data From Table" name="delte"/>	
 			<%} %><%--End Managers CheckBox Code--%>
 		</form><br />
 		<form action="index.jsp">

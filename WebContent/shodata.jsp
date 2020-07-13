@@ -68,7 +68,8 @@
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />
 				<input type="submit" value="Truncate Table" name="trunc"/><br /><br />
-				<input type="submit" value="Insert Data into Table" name="insrt"/>
+				<input type="submit" value="Insert Data into Table" name="insrt"/><br /><br />
+				<input type="submit" value="Delete Data From Table" name="delte"/>
 
 			<%}%> <%--End EMP CheckBox Code--%>
 			<%--Start Department CheckBox Code--%>
@@ -102,7 +103,8 @@
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />
 				<input type="submit" value="Truncate Table" name="trunc"/><br /><br />
-				<input type="submit" value="Insert Data into Table" name="insrt"/>
+				<input type="submit" value="Insert Data into Table" name="insrt"/><br /><br />
+				<input type="submit" value="Delete Data From Table" name="delte"/>
 
 			<%} %><%--End Department CheckBox Code--%>
 
@@ -136,7 +138,8 @@
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />
 				<input type="submit" value="Truncate Table" name="trunc"/><br /><br />
-				<input type="submit" value="Insert Data into Table" name="insrt"/>	
+				<input type="submit" value="Insert Data into Table" name="insrt"/><br /><br />
+				<input type="submit" value="Delete Data From Table" name="delte"/>	
 			<%} %><%--End Managers CheckBox Code--%>
 		</form><br />
 		<form action="index.jsp">

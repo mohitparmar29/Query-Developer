@@ -33,12 +33,21 @@ public class FetchData extends HttpServlet {
 			String cstdata=request.getParameter("CST");
 			String truncdata=request.getParameter("trunc");
 			//------------- index.jsp-----------------------
-			//------------- insertdata.jsp-----------------------
+			String deletedata=request.getParameter("delte");
+			//------------- insertdata.jsp-----------------------			
 			String insertdata=request.getParameter("insrt");
-			String addrow=request.getParameter("addrow");
+			String addrowemp=request.getParameter("addrowemp");
+			String addrowdept=request.getParameter("addrowdept");
+			String addrowmngr=request.getParameter("addrowmngr");
 			String managerid = request.getParameter("managerid");  
 	        String deptname = request.getParameter("deptname");  
-	        String salary = request.getParameter("salary");	        
+	        String salary = request.getParameter("salary");
+	        String empid = request.getParameter("empid");  
+	        String empname = request.getParameter("empname");  
+	        String sal = request.getParameter("sal");
+	        String deptid = request.getParameter("deptid");	          
+	        String mgid = request.getParameter("mgid");	 
+	        String lcid = request.getParameter("lcid");
 			//------------- insertdata.jsp-----------------------
 			//------------- result.jsp-----------------------
 			String emptable=request.getParameter("emp");
@@ -72,7 +81,7 @@ public class FetchData extends HttpServlet {
 			PreparedStatement ps3=null;						
 			System.out.println("\n I am step 3");
 			
-			if (truncdata == null && insertdata == null)
+			if (truncdata == null && insertdata == null && deletedata == null)
 			{
 				if (cstdata != null)
 				{
@@ -186,7 +195,9 @@ public class FetchData extends HttpServlet {
 					System.out.println("\nand the truncallemprecord is: " +truncallemprecord);
 					System.out.println("\nand the truncalldeptrecord is: " +truncalldeptrecord);
 					System.out.println("\nand the truncallmngrrecord is: " +truncallmngrrecord);
-					if (((emptable == null) && (depttable == null) && (managerstable == null)) && tableFlag == 0 && truncallmngrrecord == null && truncalldeptrecord == null && truncallemprecord == null && addrow == null)
+					if (((emptable == null) && (depttable == null) && (managerstable == null)) && tableFlag == 0 
+							&& truncallmngrrecord == null && truncalldeptrecord == null && truncallemprecord == null 
+							&& addrowemp == null && addrowdept == null && addrowmngr == null)
 					{
 						response.setContentType("text/html");
 						System.out.println("\n I am @ line 196 Inside");
@@ -659,10 +670,86 @@ public class FetchData extends HttpServlet {
 							}// tableFlag == 0 closed here line 192
 							
 			}//End of insert data button code
-			if (addrow != null)
+			if (addrowemp != null)
 			{
-				System.out.println("\n Inside addrow record");
-				System.out.println("\n managerstable Inside addrow record :" +managerstable);
+				System.out.println("\n Inside addrowemp record");				
+				ps2=conn.prepareStatement("Insert into EMP (EMPID,EMPNAME,SALARY) values(?,?,?)");
+				ps2.setString(1,empid);  
+		        ps2.setString(2,empname);        
+		        ps2.setString(3,sal);
+				System.out.println("\n And empid is : "+empid);
+				System.out.println("\n And empname is : "+empname);
+				System.out.println("\n And sal is : "+sal);
+				int i=ps2.executeUpdate();
+				
+				if ((empid == null || empid.isEmpty()== true) && (empname == null || empname.isEmpty()== true) && (sal == null || sal.isEmpty()== true)) 
+				{
+					response.setContentType("text/html");
+					System.out.println("\n I am @ line 687 Inside");
+					PrintWriter pw1=response.getWriter();				
+					pw1.println("<script type=\"text/javascript\">");
+					pw1.println("alert('All NULL records inserted successfully!');");
+					pw1.println("</script>");
+					RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+					rd.include(request, response);
+				}
+				else
+				{
+					response.setContentType("text/html");
+					System.out.println("\n I am @ line 698 Inside");
+					PrintWriter pw1=response.getWriter();				
+					pw1.println("<script type=\"text/javascript\">");
+					pw1.println("alert('Records inserted successfully!');");
+					pw1.println("</script>");
+					RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+					rd.include(request, response);
+				}								
+				
+			}//End of add row emp button
+			if (addrowdept != null)
+			{
+				System.out.println("\n Inside addrowdept record");				
+				ps2=conn.prepareStatement("Insert into dept_new (DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID) values(?,?,?,?)");
+				ps2.setString(1,deptid);  
+		        ps2.setString(2,deptname);        
+		        ps2.setString(3,mgid);
+		        ps2.setString(4,lcid);
+				System.out.println("\n And deptid is : "+deptid);
+				System.out.println("\n And deptname is : "+deptname);
+				System.out.println("\n And mgid is : "+mgid);
+				System.out.println("\n And lcid is : "+lcid);
+				int i=ps2.executeUpdate();
+				
+				if ((deptid == null || deptid.isEmpty()== true) 
+						&& (deptname == null || deptname.isEmpty()== true) 
+						&& (mgid == null || mgid.isEmpty()== true)
+						&& (lcid == null || lcid.isEmpty()== true)) 
+				{
+					response.setContentType("text/html");
+					System.out.println("\n I am @ line 728 Inside");
+					PrintWriter pw1=response.getWriter();				
+					pw1.println("<script type=\"text/javascript\">");
+					pw1.println("alert('All NULL records inserted successfully!');");
+					pw1.println("</script>");
+					RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+					rd.include(request, response);
+				}
+				else
+				{
+					response.setContentType("text/html");
+					System.out.println("\n I am @ line 739 Inside");
+					PrintWriter pw1=response.getWriter();				
+					pw1.println("<script type=\"text/javascript\">");
+					pw1.println("alert('Records inserted successfully!');");
+					pw1.println("</script>");
+					RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+					rd.include(request, response);
+				}								
+				
+			}//End of add row dept button
+			if (addrowmngr != null)
+			{
+				System.out.println("\n Inside addrowmngr record");				
 				ps2=conn.prepareStatement("insert into managers (MNGRID,DEPTNAME,SALARY) values(?,?,?)");
 				ps2.setString(1,managerid);  
 		        ps2.setString(2,deptname);        
@@ -675,7 +762,7 @@ public class FetchData extends HttpServlet {
 				if ((managerid == null || managerid.isEmpty()== true) && (deptname == null || deptname.isEmpty()== true) && (salary == null || salary.isEmpty()== true)) 
 				{
 					response.setContentType("text/html");
-					System.out.println("\n I am @ line 651 Inside");
+					System.out.println("\n I am @ line 764 Inside");
 					PrintWriter pw1=response.getWriter();				
 					pw1.println("<script type=\"text/javascript\">");
 					pw1.println("alert('All NULL records inserted successfully!');");
@@ -686,7 +773,7 @@ public class FetchData extends HttpServlet {
 				else
 				{
 					response.setContentType("text/html");
-					System.out.println("\n I am @ line 662 Inside");
+					System.out.println("\n I am @ line 775 Inside");
 					PrintWriter pw1=response.getWriter();				
 					pw1.println("<script type=\"text/javascript\">");
 					pw1.println("alert('Records inserted successfully!');");
@@ -695,7 +782,180 @@ public class FetchData extends HttpServlet {
 					rd.include(request, response);
 				}								
 				
-			}//End of add row button
+			}//End of add row manager button
+			if (deletedata != null)
+			{
+
+				System.out.println("\nI am here in truncdata");
+				
+				if (((emptable != null) && (depttable != null) && (managerstable != null)) ||
+						((emptable != null) && (depttable != null)) ||
+						((depttable != null) && (managerstable != null)) ||
+						((emptable != null) && (managerstable != null)))   
+					{
+						System.out.println("\n Inside first IF 263");
+						response.setContentType("text/html");
+						PrintWriter pw=response.getWriter();
+						pw.println("<script type=\"text/javascript\">");
+						pw.println("alert('Please select one table at a time');");
+						pw.println("</script>");
+						RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+						rd.include(request, response);				
+						tableFlag = 1;
+					}// tableFlag is 1 when more than one table selected else it will be zero
+					
+					if (((emptable != null) || (depttable != null) || (managerstable != null)) && tableFlag == 0)
+					{
+						if (emptable != null) 
+						{
+							if ((emptable.trim()) != "empdata") 
+							{
+								System.out.println("\nand the empdata inside is 280 : " +empdata);
+								System.out.println("\nand the empdata length inside is 281: " +empdata.length);
+							
+								if(empdata.length > 0)
+								{//If checkbox is checked than assign it with true or 1									
+									ps1=conn.prepareStatement("select * from emp order by empid");
+									Flag = 1;
+									emptableFlag=1;
+								}						
+							}
+							else
+							{
+								//Do Nothing
+							}
+						}
+						if (depttable != null) 
+						{
+							if ((depttable.trim()) != "deptdata") 
+							{
+								System.out.println("\nand the deptdata inside 299 is: " +deptdata);
+								System.out.println("\nand the deptdata length inside 300 is: " +deptdata.length);
+					
+								if(deptdata.length > 0)
+								{//If checkbox is checked than assign it with true or 1									
+									ps2=conn.prepareStatement("select * from dept_new order by department_id");
+									Flag = 1;
+									deptFlag =1;
+								}
+							}
+							else
+							{
+								//	Do Nothing
+							}
+						}						
+						if (managerstable != null) 
+						{
+							if ((managerstable.trim()) != "managersdata") 
+							{
+								System.out.println("\nand the managersdata inside 318 is: " +managersdata);
+								System.out.println("\nand the managersdata length inside 319 is: " +managersdata.length);
+					
+								if(managersdata.length > 0)
+								{//If checkbox is checked than assign it with true or 1									
+									ps3=conn.prepareStatement("select * from managers order by mngrid");
+									Flag = 1;
+									deptFlag =1;
+									managersFlag =1;
+								}				
+							}
+							else
+							{
+								//Do Nothing
+							}
+						}
+					}//End of All the not null like emptable,depttable, managerstable and tableFlag =0 code
+						System.out.println("\n I am @ line 335");
+						if (((emptable == null) && (depttable == null) && (managerstable == null)) && tableFlag == 0)
+						{
+							response.setContentType("text/html");
+							System.out.println("\n I am @ line 339 Inside");
+							PrintWriter pw=response.getWriter();				
+							pw.println("<script type=\"text/javascript\">");
+							pw.println("alert('Please select table');");
+							pw.println("</script>");
+							RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+							rd.include(request, response);
+						}//If any table not selected box closed here		
+							
+						System.out.println("\n I am at 348");
+							if (tableFlag == 0)
+							{
+								if (depttable != null) 
+								{											
+									ResultSet rs2=ps2.executeQuery();
+									System.out.println("\n I am at 354");	
+									
+									while (rs2.next())
+									{
+											//Add records into data list
+										dataList.add(rs2.getString(1));
+										dataList.add(rs2.getString(2));
+										dataList.add(rs2.getString(3));
+										dataList.add(rs2.getString(4));
+									}// While rs2 closed here			
+									
+								}//depttable != null closed here
+				
+								if (emptable != null) 
+								{
+									System.out.println("\n I am at 369");
+									ResultSet rs1=ps1.executeQuery();
+									while (rs1.next()) 
+									{
+										//Add records into data list
+										dataList.add(rs1.getString(1));
+										dataList.add(rs1.getString(2));
+										dataList.add(rs1.getString(3));
+									}//while loop rs1 closed here
+									
+								}// emptable != null closed here
+				
+								if (managerstable != null)
+								{
+					
+									System.out.println("\n I am at 384");					
+									ResultSet rs3=ps3.executeQuery();
+									while (rs3.next()) 
+									{		
+										//Add records into data list
+										dataList.add(rs3.getString(1));
+										dataList.add(rs3.getString(2));
+										dataList.add(rs3.getString(3));													
+									}// while rs3 closed here
+									
+								}// managerstable != null closed here
+				
+								//out.println("</table></center></body></html>");
+								if (managersFlag ==1)
+								{
+									nextJSP = "/deleterows.jsp";				  
+									request.setAttribute("managersdata", dataList);
+									RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;
+									dispatcher.forward(request,response);
+									Flag =2;
+									deptFlag =2;
+								}//managersFlag ==1 closed here
+								if (deptFlag ==1)
+								{
+									nextJSP = "/deleterows.jsp";				  
+									request.setAttribute("deptdata", dataList);
+									RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;							
+									dispatcher.forward(request,response);
+									Flag =2;
+								}//deptFlag ==1 closed here
+				
+								if (Flag ==1)
+								{
+									nextJSP = "/deleterows.jsp";
+									request.setAttribute("empdata", dataList);				  
+									RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;							
+									dispatcher.forward(request,response);
+								}//Flag ==1 closed here
+								
+							}// tableFlag == 0 closed here line 192
+							
+			}// End of delete data
 			
 		} // End of Try box closed
 		
