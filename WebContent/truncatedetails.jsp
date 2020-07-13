@@ -52,14 +52,14 @@
 					<p style="font-family:courier;float:right;width:70%;color:darkmagenta;font-size:80%;">
 					Note: The SQL TRUNCATE TABLE statement is used to remove all records from a table.If you want to remove all below records.Click Here->
 					
-					<input type="submit" value="Truncate Table" name="trunca"/></p>
+					<input type="submit" value="Truncate Table" name="truncemp"/></p>
 					
 				<%}
 				
 				else
 				{%>
 					<p style="font-family:courier;color:orange red;font-size:180%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:70%;">
-					Managers Table is empty. Please insert some data to perform truncate operation.</p>	
+					EMP Table is empty. Please insert some data to perform truncate operation.</p>	
 				<%}%>
 								
 				<table border="1" align="right" style="width:70%;">
@@ -83,7 +83,8 @@
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/>
+				<input type="submit" value="Truncate Table" name="trunc"/><br /><br />
+				<input type="submit" value="Insert Data into Table" name="insrt"/>
 
 			<%}%> <%--End EMP CheckBox Code--%>
 			<%--Start Department CheckBox Code--%>
@@ -102,14 +103,14 @@
 					<p style="font-family:courier;float:right;width:70%;color:darkmagenta;font-size:80%;">
 					Note: The SQL TRUNCATE TABLE statement is used to remove all records from a table.If you want to remove all below records.Click Here->
 					
-					<input type="submit" value="Truncate Table" name="trunca"/></p>
+					<input type="submit" value="Truncate Table" name="truncdept"/></p>
 					
 				<%}
 				
 				else
 				{%>
 					<p style="font-family:courier;color:orange red;font-size:180%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:70%;">
-					Managers Table is empty. Please insert some data to perform truncate operation.</p>	
+					Department Table is empty. Please insert some data to perform truncate operation.</p>	
 				<%}%>	
 				
 				<table border="1" align="right" style="width:70%">
@@ -131,7 +132,8 @@
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/>
+				<input type="submit" value="Truncate Table" name="trunc"/><br /><br />
+				<input type="submit" value="Insert Data into Table" name="insrt"/>
 
 			<%} %><%--End Department CheckBox Code--%>
 
@@ -151,7 +153,7 @@
 					<p style="font-family:courier;float:right;width:70%;color:darkmagenta;font-size:80%;">
 					Note: The SQL TRUNCATE TABLE statement is used to remove all records from a table.If you want to remove all below records.Click Here->
 					
-					<input type="submit" value="Truncate Table" name="trunca"/></p>
+					<input type="submit" value="Truncate Table" name="truncmngr"/></p>
 					
 				<%}
 				
@@ -179,7 +181,8 @@
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/>	
+				<input type="submit" value="Truncate Table" name="trunc"/><br /><br />
+				<input type="submit" value="Insert Data into Table" name="insrt"/>	
 			<%} %><%--End Managers CheckBox Code--%>
 		</form><br />
 		<form action="index.jsp">

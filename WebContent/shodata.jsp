@@ -67,7 +67,8 @@
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/>
+				<input type="submit" value="Truncate Table" name="trunc"/><br /><br />
+				<input type="submit" value="Insert Data into Table" name="insrt"/>
 
 			<%}%> <%--End EMP CheckBox Code--%>
 			<%--Start Department CheckBox Code--%>
@@ -100,7 +101,8 @@
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/>
+				<input type="submit" value="Truncate Table" name="trunc"/><br /><br />
+				<input type="submit" value="Insert Data into Table" name="insrt"/>
 
 			<%} %><%--End Department CheckBox Code--%>
 
@@ -133,7 +135,8 @@
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/>	
+				<input type="submit" value="Truncate Table" name="trunc"/><br /><br />
+				<input type="submit" value="Insert Data into Table" name="insrt"/>	
 			<%} %><%--End Managers CheckBox Code--%>
 		</form><br />
 		<form action="index.jsp">
