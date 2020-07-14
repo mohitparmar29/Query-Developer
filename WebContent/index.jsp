@@ -12,6 +12,8 @@
 			<center>
 				<h1 style="background-color:powderblue;color:red;">
 				Welcome to Query Developer</h1>
+				<table>
+				<tr><th>
 				<h3 style="font-family:verdana;background-color:palegoldenrod;color:mediumaquamarine;font-size:150%;">
 				Introduction</h3>
 				<p style="font-family:courier;border-color: #FF0000 #00FF00 #0000FF #000000; border-style:dotted solid;font-size:100%;">
@@ -22,6 +24,9 @@
 				<p style="font-family:verdana;background-color:palegoldenrod;color:mediumaquamarine;font-size:150%;">
 				Click Here to start Learning SQL</p>
 				<input type = "submit" value = "Check and Select Table" name="CST" /></p>
+				</th>
+				</tr>
+				</table>
 			</center>
 		</form>
 	</body>

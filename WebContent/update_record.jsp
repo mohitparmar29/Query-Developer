@@ -38,7 +38,7 @@
 					}
 					</script>
 		<center>
-		<h1 style="background-color:powderblue;color:red;">Delete Records From Table</h1>
+		<h1 style="background-color:powderblue;color:red;">Update Table Records</h1>
 		</center>			
 		<form action="FetchData" method="post">
 		<% 			
@@ -55,10 +55,10 @@
 			if (empdata != null) 
 			{%>
 				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-				Query Used To Delete Data from Table:</p>
+				Query Used To update Data in Table:</p>
 			
 				<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
-				Delete from EMP where EMPID = value of empid;</p>
+				update table EMP set empname=value of empname,salary=value of salary where EMPID = value of empid;</p>
 											
 				<table  id="myTableEmp" align="right" style="width:70%">
 				
@@ -72,11 +72,12 @@
 								<td width="140"><%=itr.next()%></td>
 								<td width="180"><%=itr.next()%></td>
 								<td width="168"><%=itr.next()%></td>
-								<td><a href=deleteData?empid=<%=empdata.get(0) %>> Delete </a></td>
+								<td><a href=editData?empid=<%=empdata.get(0) %>> Edit </a></td>
 							</center>
 						</tr>
 					<%}%>
 				</table>
+				
 				<%if (empdata.isEmpty() == true) 
 				{%>
 				<p style="font-family:courier;color:orange red;font-size:110%;float:right;width:60%;">
@@ -89,7 +90,7 @@
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />				
-				<input type="submit" value="Delete Data From Table" name="delte"/>
+				<input type="submit" value="Update Data In Table" name="updte"/>
 				</th></tr></table>
 
 			<%}%> <%--End EMP CheckBox Code--%>
@@ -176,6 +177,30 @@
 				<input type="submit" value="Delete Data From Table" name="delte"/>	
 			<%} %><%--End Managers CheckBox Code--%>
 		</form><br />
+		<form method="POST" action="editData">
+            <input type="hidden" name="code" value="${empdata.get(0)}" />
+            <table border="0">
+               <tr>
+                  <td>empid</td>
+                  <td style="color:red;">
+                  <input type="text" name="empid" value="${empdata.get(0)}" /></td>
+               </tr>
+               <tr>
+                  <td>empname</td>
+                  <td><input type="text" name="empname" value="${empdata.get(1)}" /></td>
+               </tr>
+               <tr>
+                  <td>salary</td>
+                  <td><input type="text" name="salary" value="${empdata.get(2)}" /></td>
+               </tr>
+               <tr>
+                  <td colspan = "2">
+                      <input type="submit" value="Submit" />
+                      <a href="index.jsp">Cancel</a>
+                  </td>
+               </tr>
+            </table>
+         </form>
 		<form action="index.jsp">
 			<input type="submit" value="HOME" />
 		</form>

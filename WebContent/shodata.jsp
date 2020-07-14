@@ -38,12 +38,13 @@
 				%>
 			<%--Array List creation for EMP , DEPT and Managers--%>
 			<%--Start EMP CheckBox Code--%>
+			
 			<% 
 			if (empdata != null) 
 			{%>
 				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:120%;">
 				Query Used To Select Table Record:</p>
-				<p style="font-family:courier;color:orange red;font-size:120%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:70%;">
+				<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
 				select * from emp order by empid;</p><br /><br />
 				
 				<table border="1" align="right" style="width:70%;">
@@ -60,16 +61,25 @@
 							</center>
 						</tr>
 					<%}%>
+					
 				</table>
 				
-				<h4>Table List:</h4>
+				<table><tr><th style="background-color: gold;color: olivedrab;">
+				<h4 style="background-color:powderblue;color:red;">Table List:</h4> 
+				<h4 style="color:indigo;">Please select one table ,</h4>
+				<h4 style="color:indigo;">before clicking on below buttons.</h4>
+				<h5 style="color:orangered;">Please select one table at a time.</h5>
 				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/><br /><br />
-				<input type="submit" value="Insert Data into Table" name="insrt"/><br /><br />
-				<input type="submit" value="Delete Data From Table" name="delte"/>
+				<input type = "submit" value = "View Records"  /><br /><br />
+				<input type="submit" value="Truncate Table" name="trunc" /><br /><br />
+				<input type="submit" value="Insert Records" name="insrt" /><br /><br />
+				<input type="submit" value="Update Records" name="updte" /><br /><br />
+				<input type="submit" value="Delete Records" name="delte" /><br /><br />				
+				<input type="submit" value="Drop Table" name="dropt" /><br /><br />
+				<input type="submit" value="Create Table" name="crete" /><br /><br />
+				</th></tr></table>
 
 			<%}%> <%--End EMP CheckBox Code--%>
 			<%--Start Department CheckBox Code--%>
