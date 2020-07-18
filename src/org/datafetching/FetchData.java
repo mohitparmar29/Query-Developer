@@ -33,12 +33,19 @@ public class FetchData extends HttpServlet {
 			String cstdata=request.getParameter("CST");
 			String truncdata=request.getParameter("trunc");
 			//------------- index.jsp-----------------------
+			//------------- CreateTable.jsp-----------------------
+			String createtable=request.getParameter("crete");
+			//------------- CreateTable.jsp-----------------------
 			//------------- deleterows.jsp-----------------------
 			String deletedata=request.getParameter("delte");
 			String deletevalue = request.getParameter("id");
 			//------------- deleterows.jsp-----------------------
 			//------------- update_reocrd.jsp-----------------------
 			String editdata=request.getParameter("updte");			
+			String editbutton = request.getParameter("editbutton");
+			String sal_edt = request.getParameter("sal_edt");
+	        String empid_edt = request.getParameter("empid_edt");  
+	        String empname_edt = request.getParameter("empname_edt");
 			//------------- update_reocrd.jsp-----------------------
 			//------------- insertdata.jsp-----------------------			
 			String insertdata=request.getParameter("insrt");
@@ -87,7 +94,8 @@ public class FetchData extends HttpServlet {
 			PreparedStatement ps3=null;						
 			System.out.println("\n I am step 3");
 			
-			if (truncdata == null && insertdata == null && deletedata == null && editdata == null)
+			if (truncdata == null && insertdata == null && deletedata == null && editdata == null 
+					&& editbutton == null && createtable == null)
 			{
 				if (cstdata != null)
 				{
@@ -691,8 +699,9 @@ public class FetchData extends HttpServlet {
 				}
 				else
 				{
-					System.out.println("\n Inside addrowemp record");				
-					ps2=conn.prepareStatement("Insert into EMP (EMPID,EMPNAME,SALARY) values(?,?,?)");
+					System.out.println("\n Inside addrowemp record");
+					String sql = "Insert into EMP (EMPID,EMPNAME,SALARY) values(?,?,?)";
+					ps2=conn.prepareStatement(sql);
 					ps2.setString(1,empid);  
 			        ps2.setString(2,empname);        
 			        ps2.setString(3,sal);
@@ -700,6 +709,7 @@ public class FetchData extends HttpServlet {
 					System.out.println("\n And empname is : "+empname);
 					System.out.println("\n And sal is : "+sal);
 					int i=ps2.executeUpdate();
+					System.out.println("\n And sql is : "+ps2.getResultSet());
 					response.setContentType("text/html");
 					System.out.println("\n I am @ line 701 Inside");
 					PrintWriter pw1=response.getWriter();				
@@ -980,7 +990,29 @@ public class FetchData extends HttpServlet {
 							}// tableFlag == 0 closed here line 192
 							
 			}// End of delete data & editdata
-			
+			if (editbutton != null) 
+			{
+				String sql = "Update EMP set EMPNAME=?,SALARY=? where EMPID=? ";						
+				ps2=conn.prepareStatement(sql);
+				ps2.setString(1,empid_edt);  
+		        ps2.setString(2,empname_edt);        
+		        ps2.setString(3,sal_edt);
+		        ps2.executeUpdate();	        
+				System.out.println("\n And empid is : "+empid_edt);
+				System.out.println("\n And empname is : "+empname_edt);
+				System.out.println("\n And sal is : "+sal_edt);
+				System.out.println("\n And ps2.executeUpdate() is : "+ps2.executeUpdate());
+				System.out.println("\n And ps2.toString() is : "+ps2.toString());
+				//int i=ps2.executeUpdate();
+				response.setContentType("text/html");
+				System.out.println("\n I am @ line 133 Inside");
+				PrintWriter pw1=response.getWriter();				
+				pw1.println("<script type=\"text/javascript\">");
+				pw1.println("alert('Records Updated successfully!');");
+				pw1.println("</script>");
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+				rd.include(request, response);
+				}// End of editbutton EMP table
 		} // End of Try box closed
 		
 		catch(Exception e) 

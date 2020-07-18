@@ -48,13 +48,16 @@
 				<input type="submit" value="Update Records" name="updte" /><br /><br />
 				<input type="submit" value="Delete Records" name="delte" /><br /><br />				
 				<input type="submit" value="Drop Table" name="dropt" /><br /><br />
-				<input type="submit" value="Create Table" name="crete" /><br /><br />
+				
 				
 		</form>									
 			<%}%>	
 		<%-- <form action="InsertRows" method="post">	
 			<input type="submit" value="Insert Data" name="insrt" /><br /><br />
-		</form>--%>	
+		</form>--%>
+		<form action="CreateTable.jsp">
+			<input type="submit" value="Create Table" /><br /><br />
+		</form>	
 		<form action="index.jsp">
 			<input type="submit" value="HOME" />
 		</form>

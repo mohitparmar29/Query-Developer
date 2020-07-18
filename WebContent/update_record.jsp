@@ -30,13 +30,29 @@
 			}
 		</style>
 		<script>				
-				function deleteRow(r) {
-					  var i = r.parentNode.parentNode.rowIndex;
-					  document.getElementById("myTableEmp").deleteRow(i);
-					  document.getElementById("myTableDept").deleteRow(i);
-					  document.getElementById("myTableMang").deleteRow(i);
-					}
-					</script>
+				var table = document.getElementById("myTableEmp"),rIndex;
+				
+				for (var i=0 ; i < table.rows.length; i++ )
+				{
+					table.rows[i].onclick = function()
+					{
+						rIndex = this.rowIndex;
+						console.log(rIndex);
+						
+						document.getElementById("empid_edt").value = this.cells[0].innerHTML;
+						document.getElementById("empname_edt").value = this.cells[1].innerHTML;
+						document.getElementById("sal_edt").value = this.cells[2].innerHTML;
+					};
+						
+				}
+				
+				function editRow()
+				{
+					table.rows[rIndex].cells[0].innerHTML = document.getElementById("empid_edt").value;
+					table.rows[rIndex].cells[1].innerHTML = document.getElementById("empname_edt").value;
+					table.rows[rIndex].cells[2].innerHTML = document.getElementById("sal_edt").value;
+				}
+				</script>
 		<center>
 		<h1 style="background-color:powderblue;color:red;">Update Table Records</h1>
 		</center>			
@@ -58,11 +74,12 @@
 				Query Used To update Data in Table:</p>
 			
 				<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
-				update table EMP set empname=value of empname,salary=value of salary where EMPID = value of empid;</p>
-											
+				update EMP set empname=value of empname,salary=value of salary where EMPID = value of empid;</p>
+				
+												
 				<table  id="myTableEmp" align="right" style="width:70%">
 				
-					<tr><th>EMPLOYEE NUMBER</th><th>EMPLOYEE NAME</th><th>SALARY</th><th>Delete Rows</th></tr>
+					<tr><th>EMPLOYEE NUMBER</th><th>EMPLOYEE NAME</th><th>SALARY</th></tr>
 					<%Iterator itr;
 					for (itr=empdata.iterator(); itr.hasNext(); )
 					{
@@ -72,11 +89,12 @@
 								<td width="140"><%=itr.next()%></td>
 								<td width="180"><%=itr.next()%></td>
 								<td width="168"><%=itr.next()%></td>
-								<td><a href=editData?empid=<%=empdata.get(0) %>> Edit </a></td>
+								<td><a href=editData?empid_edt=<%=empdata.get(0) %>> Edit </a></td>								
 							</center>
 						</tr>
 					<%}%>
 				</table>
+				
 				
 				<%if (empdata.isEmpty() == true) 
 				{%>
@@ -177,30 +195,7 @@
 				<input type="submit" value="Delete Data From Table" name="delte"/>	
 			<%} %><%--End Managers CheckBox Code--%>
 		</form><br />
-		<form method="POST" action="editData">
-            <input type="hidden" name="code" value="${empdata.get(0)}" />
-            <table border="0">
-               <tr>
-                  <td>empid</td>
-                  <td style="color:red;">
-                  <input type="text" name="empid" value="${empdata.get(0)}" /></td>
-               </tr>
-               <tr>
-                  <td>empname</td>
-                  <td><input type="text" name="empname" value="${empdata.get(1)}" /></td>
-               </tr>
-               <tr>
-                  <td>salary</td>
-                  <td><input type="text" name="salary" value="${empdata.get(2)}" /></td>
-               </tr>
-               <tr>
-                  <td colspan = "2">
-                      <input type="submit" value="Submit" />
-                      <a href="index.jsp">Cancel</a>
-                  </td>
-               </tr>
-            </table>
-         </form>
+		
 		<form action="index.jsp">
 			<input type="submit" value="HOME" />
 		</form>

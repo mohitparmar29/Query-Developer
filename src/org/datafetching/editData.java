@@ -29,7 +29,7 @@ public class editData extends HttpServlet {
 	    PrintWriter out = response.getWriter();
 	    ArrayList dataList = new ArrayList();
 	    
-	    String valueemp = request.getParameter("empid");
+	    String valueemp = request.getParameter("empid_edt");
 	    String valuedept = request.getParameter("deptid");
 	    String valuemngr = request.getParameter("mgid");
 	    
@@ -58,7 +58,7 @@ public class editData extends HttpServlet {
 			}//while loop rs1 closed here
 			
 			request.setAttribute("empdata", dataList);				  
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/update_record.jsp") ;							
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/editData.jsp") ;							
 			dispatcher.forward(request,response);
 				        
 	        }
@@ -103,39 +103,5 @@ public class editData extends HttpServlet {
 	    }	
 	
 }
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		try {
-			ArrayList dataList = new ArrayList();
-			String salary = request.getParameter("salary");
-	        String empid = request.getParameter("empid");  
-	        String empname = request.getParameter("empname");
-			
-	        System.out.println("\n Before connection And empid is : "+empid);
-	        
-	        Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection conn=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","hr","hr");
-			PreparedStatement ps2=null;
-			
-			ps2=conn.prepareStatement("Update EMP set EMPNAME=?,SALARY=? where EMPID=?");
-			ps2.setString(1,empid);  
-	        ps2.setString(2,empname);        
-	        ps2.setString(3,salary);
-			System.out.println("\n And empid is : "+empid);
-			System.out.println("\n And empname is : "+empname);
-			System.out.println("\n And sal is : "+salary);
-			int i=ps2.executeUpdate();
-			request.setAttribute("empdata", dataList);				  
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/update_record.jsp") ;							
-			dispatcher.forward(request,response);
-		}
-		catch(Exception e){
-	        e.printStackTrace();
-	    }
-		
-		
-	}
-
+	
 }
