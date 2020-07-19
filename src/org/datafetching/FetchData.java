@@ -35,6 +35,9 @@ public class FetchData extends HttpServlet {
 			//------------- index.jsp-----------------------
 			//------------- CreateTable.jsp-----------------------
 			String createtable=request.getParameter("crete");
+			String createtablequery=request.getParameter("createtablequery");
+			String creatquery=request.getParameter("message");
+			
 			//------------- CreateTable.jsp-----------------------
 			//------------- deleterows.jsp-----------------------
 			String deletedata=request.getParameter("delte");
@@ -95,14 +98,30 @@ public class FetchData extends HttpServlet {
 			System.out.println("\n I am step 3");
 			
 			if (truncdata == null && insertdata == null && deletedata == null && editdata == null 
-					&& editbutton == null && createtable == null)
+					&& editbutton == null && createtable == null && createtablequery == null)
 			{
 				if (cstdata != null)
 				{
-					al.add("EMP");
-					al.add("DEPT");
-					al.add("MANAGERS");
-					request.setAttribute("tablelist", al);
+					//al.add("EMP");
+					//al.add("DEPT");
+					//al.add("MANAGERS");
+					System.out.println("\n Before Query");
+					ps1=conn.prepareStatement("select table_name from all_tables where (table_name IN ('EMP','DEPT_NEW','MANAGERS','TESTERDATA') and OWNER ='HR')");
+					System.out.println("\n After Query");
+					ResultSet rs3=ps1.executeQuery();
+					System.out.println("\n After execute query");
+					System.out.println("\n rs3.next():" +rs3.next());
+					//System.out.println("\n rs3.getString(1): " +rs3.getString("table_name"));
+					while (rs3.next()) 
+					{		
+						//Add records into data list
+						dataList.add(rs3.getString("table_name"));						
+					}// while rs3 closed here
+					
+					//System.out.println("\n rs3.getString(1): " +rs3.getString(1));
+					
+					
+					request.setAttribute("tablelist", dataList);
 					RequestDispatcher rd = request.getRequestDispatcher("/result.jsp");
 					rd.forward(request, response);
 				}//cstdata not null condition end
@@ -1013,6 +1032,23 @@ public class FetchData extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
 				rd.include(request, response);
 				}// End of editbutton EMP table
+			
+			//Start of createtable
+			if (createtablequery != null) 
+			{
+				System.out.println("\n And creatquery message is : "+creatquery);
+				ps2=conn.prepareStatement(creatquery);				
+		        ps2.executeQuery();
+				response.setContentType("text/html");
+				System.out.println("\n I am @ line 1033 Inside");
+				PrintWriter pw1=response.getWriter();				
+				pw1.println("<script type=\"text/javascript\">");
+				pw1.println("alert('Table Created successfully!');");
+				pw1.println("</script>");
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+				rd.include(request, response);
+				
+			}//End of createtable
 		} // End of Try box closed
 		
 		catch(Exception e) 

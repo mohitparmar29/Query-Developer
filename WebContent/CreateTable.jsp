@@ -11,22 +11,25 @@
             .tab{float: left;}
             .tab-2{margin-left: 50px}
             .tab-3{margin-left: 50px}
-            .tab-2 input{display: block;margin-bottom: 10px}
-            
+            .tab-1 input{display: block;margin-bottom: 10px}            
             
  </style>
 </head>
 <body bgcolor="wheat">
-	<form action="index.jsp">
-		<input type="submit" value="HOME" />
-	</form>
-		<center>
+	
+		<center>		
 			<h1 style="background-color:powderblue;color:red;">Create Table</h1>
-			<h3 style="color:blue;">Enter the Table Name:<input type="text" id="tablename"/></h3><br />
 		</center>
+		<form action="index.jsp">
+			<input type="submit" value="HOME" />
+		</form>	
+			<p style="border-style:dotted solid;border-color: #800080 #800080;width:10%;font-family:courier;color:maroon;font-size:120%;">STEP -1</p>
+			<h4 style="color:blue;">Enter the Table Name:<input type="text" id="tablename"/></h4><br />
 		
-		<div class="container">			
-            <div class="tab tab-2">
+		
+		<div class="container">						
+            <div class="tab tab-1">
+            	<p style="border-style:dotted solid;border-color: #800080 #800080;width:55%;font-family:courier;color:maroon;font-size:120%;">STEP -2</p><br/>
                 Column Name :<input type="text" id="column_id" name="column_id">
                 Data Type :<select name="datatypes" id="datatype_id" name="datatype_id"><br />
         						<option value="number">number</option>
@@ -35,27 +38,32 @@
                 Size :<input type="text" id="size_id" name="size_id">
                 
                 <button onclick="addHtmlTableRow();">Add</button>
-                <button onclick="editHtmlTbleSelectedRow();">Edit</button>
-                <button onclick="removeSelectedRow();">Remove</button>  
+              <%--  <button onclick="editHtmlTbleSelectedRow();">Edit</button>
+                <button onclick="removeSelectedRow();">Remove</button>  --%>  
             </div>
-            <div class="tab tab-1">
+            
+            <div class="tab tab-2">
+            	<p style="border-style:dotted solid;border-color: #800080 #800080;width:40%;font-family:courier;color:maroon;font-size:120%;">STEP -3</p><br/>
             	<table id="myTable" border="1">
                     <tr><th>Column Name</th><th>Data Type</th><th>Size</th></tr>                                                  
                 </table>                              
-                <input type="submit" value="Create Table Query" name="ctq" onclick="Createtablequery();"/><br /><br />
+                <input type="submit" value="Generate Query" name="gnrtq" onclick="Createtablequery();"/>
+                <input type="submit" value="Clear Table" name="clearT" onclick="ClearTable();"/><br /><br />
             </div>
+            
             <div class="tab tab-3">
-               	 <p id="demo">Generated Table IS:</p>
-        			                             
-                <input type="submit" value="Create Table" name="createtable" /><br /><br />                
+            	<p style="border-style:dotted solid;border-color: #800080 #800080;width:40%;font-family:courier;color:maroon;font-size:120%;">STEP -4</p><br />
+            	<p style="font-family:courier;float:right;color:crimson;font-size:100%;">
+				Query Used To Create Table:</p><br /><br />
+				<form action="FetchData" method="post">
+               	 <p><textarea id="demo" name="message" rows="4" cols="30"></textarea></p>
+               	         			                             
+                <input type="submit" value="Create Table" name="createtablequery" /><br /><br />
+                </form>                
             </div>            
-        </div>
+        </div>		
         
-        
-        
-		
-		<script>
-		
+		<script>		
             
             var rIndex,
                 table = document.getElementById("myTable");
@@ -68,6 +76,7 @@
                     column_id = document.getElementById("column_id").value,
                     datatype_id = document.getElementById("datatype_id").value,
                     size_id = document.getElementById("size_id").value;
+                var tablename = document.getElementById("tablename").value;
             
                 if(column_id === ""){
                     alert("Column Name Connot Be Empty");
@@ -81,6 +90,10 @@
                     alert("size_id Connot Be Empty");
                     isEmpty = true;
                 }
+                else if(tablename === ""){
+                    alert("Table Name Connot Be Empty");
+                    isEmpty = true;
+                }
                 return isEmpty;
             }
             
@@ -91,21 +104,29 @@
                 // create a new row and cells
                 // get value from input text
                 // set the values into row cell's
-                if(!checkEmptyInput()){
-                var newRow = table.insertRow();
-                var cell1 = newRow.insertCell(0);
-                var cell2 = newRow.insertCell(1);
-                var cell3 = newRow.insertCell(2);
-                var column_id = document.getElementById("column_id").value;
-                var datatype_id = document.getElementById("datatype_id").value;
-                var size_id = document.getElementById("size_id").value;
-            
-                cell1.innerHTML = column_id;
-                cell2.innerHTML = datatype_id;
-                cell3.innerHTML = size_id;
-                // call the function to set the event to the new row
-                selectedRowToInput();
-            }
+            	if(table.rows.length >= 4)
+            		{
+                    	alert("Your can insert 3 rows only!"); 
+                    }
+            	else 
+            		{
+            			if(!checkEmptyInput()){
+                        var newRow = table.insertRow();
+                        var cell1 = newRow.insertCell(0);
+                        var cell2 = newRow.insertCell(1);
+                        var cell3 = newRow.insertCell(2);
+                        var column_id = document.getElementById("column_id").value;
+                        var datatype_id = document.getElementById("datatype_id").value;
+                        var size_id = document.getElementById("size_id").value;
+                    
+                        cell1.innerHTML = column_id;
+                        cell2.innerHTML = datatype_id;
+                        cell3.innerHTML = size_id;
+                        // call the function to set the event to the new row
+                      //  selectedRowToInput();
+                        ClearInputText();
+            		}                
+            	}
             }
                         
             // display selected row data into input text
@@ -127,6 +148,8 @@
             }
             selectedRowToInput();
             
+            /*
+            
             function editHtmlTbleSelectedRow()
             {
                 var column_id = document.getElementById("column_id").value,
@@ -138,11 +161,17 @@
                 table.rows[rIndex].cells[2].innerHTML = size_id;
               }
             }
+            */
             
-            function removeSelectedRow()
+            function ClearTable()
             {
-                table.deleteRow(rIndex);
-                // clear input text
+                table.deleteRow();               
+            }
+            
+            
+            function ClearInputText()
+            {
+                 // clear input text
                 document.getElementById("column_id").value = "";
                 document.getElementById("datatype_id").value = "";
                 document.getElementById("size_id").value = "";
@@ -157,28 +186,51 @@
             	var text1 = " ";
             	var text2 = " ";
             	var text3 = " ";
+            	var len = table.rows.length;
             	var tablename = document.getElementById("tablename").value;
+            	
             	
             	//x = document.getElementById("myTable").rows[1].cells.item(0).innerHTML;
             	//y = document.getElementById("myTable").rows[1].cells.item(1).innerHTML;
             	//z = document.getElementById("myTable").rows[1].cells.item(2).innerHTML;
-            	for (i=0;i<=2;i++)
+            	for (i=0 ; i < (len-1) ; i++)
             		{
             		
-            			for (j=0;j<=2;j++)
+            			for (j=0;j<3;j++)
             				{
             				//text += document.getElementById("myTable").rows[i+1].cells.item(j).innerHTML + " ";
             				if (j==0){x = document.getElementById("myTable").rows[i+1].cells.item(j).innerHTML;}
             				if (j==1){y = document.getElementById("myTable").rows[i+1].cells.item(j).innerHTML;}
             				if (j==2){z = document.getElementById("myTable").rows[i+1].cells.item(j).innerHTML;}
             				}
-            			if (i==0){text1 = x+" "+y+"("+z+")"+"," +"<br>";}
-            			if (i==1){text2 = x+" "+y+"("+z+")"+"," +"<br>";}
-            			if (i==2){text3 = x+" "+y+"("+z+")";}
+            			if ((len-1)==3)
+            				{
+            					if (i==0){text1 = x+" "+y+"("+z+")"+",";}
+            					if (i==1){text2 = x+" "+y+"("+z+")"+",";}
+            					if (i==2){text3 = x+" "+y+"("+z+")";}
+            				}
+            			if ((len-1)==2)
+        					{
+        						if (i==0){text1 = x+" "+y+"("+z+")"+",";}
+        							if (i==1)
+        								{
+        									text2 = x +" "+ y + "(" + z +")";
+        									text3 = "";
+        								}        						
+        					}
+            			if ((len-1)==1)
+        					{
+        						if (i==0)
+        							{
+        								text1 = x+" "+y+"("+z+")";
+        								text2 = "";
+        								text3 = "";
+        							}        							
+        					}
             		//	text += x+" "+y+"("+z+")"+"," +"<br>";
             		}
             	text = text1 + text2 + text3;
-            	document.getElementById("demo").innerHTML = "Create table " + tablename +" (" + text +");";
+            	document.getElementById("demo").innerHTML = "Create table " + tablename +" (" + text +")";
             	//document.getElementById("demo").innerHTML = "Found " + x + y + z + " cells in the first tr element.";
             }
             
