@@ -12,7 +12,7 @@
 			<center>
 				<h1 style="background-color:powderblue;color:red;">
 				Welcome to Query Developer</h1>
-				<table>
+				<table>				
 				<tr><th>
 				<h3 style="font-family:verdana;background-color:palegoldenrod;color:mediumaquamarine;font-size:150%;">
 				Introduction</h3>

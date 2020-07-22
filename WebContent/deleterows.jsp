@@ -29,6 +29,7 @@
   				background-color: #F5FFFA;
 			}
 		</style>
+		
 		<script>				
 				function deleteRow(r) {
 					  var i = r.parentNode.parentNode.rowIndex;
@@ -36,7 +37,7 @@
 					  document.getElementById("myTableDept").deleteRow(i);
 					  document.getElementById("myTableMang").deleteRow(i);
 					}
-					</script>
+		</script> 
 		<center>
 		<h1 style="background-color:powderblue;color:red;">Delete Records From Table</h1>
 		</center>			
@@ -48,6 +49,17 @@
 			ArrayList managersdata= (ArrayList)request.getAttribute("managersdata");
 			
 			//out.println(empdata);
+			/*
+			out.println("the size of empdata is :"+empdata.size());
+			out.println("\nthe empdata.get(0) is :"+empdata.get(0));
+			out.println("\nthe empdata.get(1) is :"+empdata.get(1));
+			out.println("\nthe empdata.get(2) is :"+empdata.get(2));
+			out.println("\nthe empdata.get(3) is :"+empdata.get(3));
+			out.println("\nthe empdata.get(4) is :"+empdata.get(4));
+			out.println("\nthe empdata.get(5) is :"+empdata.get(5));
+			out.println("\nthe empdata.get(6) is :"+empdata.get(6));
+			out.println("\nthe empdata.get(7) is :"+empdata.get(7));
+			out.println("\nthe empdata.get(8) is :"+empdata.get(8));*/
 				%>
 			<%--Array List creation for EMP , DEPT and Managers--%>
 			<%--Start EMP CheckBox Code--%>
@@ -63,18 +75,21 @@
 				<table  id="myTableEmp" align="right" style="width:70%">
 				
 					<tr><th>EMPLOYEE NUMBER</th><th>EMPLOYEE NAME</th><th>SALARY</th><th>Delete Rows</th></tr>
-					<%Iterator itr;
-					for (itr=empdata.iterator(); itr.hasNext(); )
+					<%
+					
+					Iterator itr = empdata.iterator();
+					
+					while (itr.hasNext())
 					{
-						%>
+					 	String empid = (String)itr.next();				
+					%>
 						<tr>
-							<center>
-								<td width="140"><%=itr.next()%></td>
-								<td width="180"><%=itr.next()%></td>
-								<td width="168"><%=itr.next()%></td>
-								<td><a href=deleteData?empid=<%=empdata.get(0) %>> Delete </a></td>
-							</center>
+							<td><%=empid%></td>
+							<td><%=itr.next()%></td>
+							<td><%=itr.next()%></td>
+							<td><a href=deleteData?empid=<%=empid%>> Delete </a></td>					
 						</tr>
+						
 					<%}%>
 				</table>
 				<%if (empdata.isEmpty() == true) 
@@ -107,16 +122,18 @@
 				<table  id="myTableDept" align="right" style="width:70%">
 				
 					<tr><th>Department ID</th><th>Depatment Name</th><th>Manager ID</th><th>Location ID</th><th>Delete Rows</th></tr>
-					<% Iterator itr;
-					for (itr=deptdata.iterator(); itr.hasNext(); )
-					{%>
+					<% 
+					Iterator itr = deptdata.iterator();					
+					while (itr.hasNext())
+					{
+					 	String deptid = (String)itr.next();
+					 	%>
 						<tr>
-							<td width="140"><%=itr.next()%></td>
-							<td width="180"><%=itr.next()%></td>
-							<td width="168"><%=itr.next()%></td>
-							<td width="168"><%=itr.next()%></td>
-							<td><a href=deleteData?deptid=<%=deptdata.get(0) %>> Delete </a></td>
-						</tr>
+							<td><%=deptid%></td>
+							<td><%=itr.next()%></td>
+							<td><%=itr.next()%></td>
+							<td><a href=deleteData?deptid=<%=deptid%>> Delete </a></td>					
+						</tr>						
 					<%}%>
 				</table>
 				<%if (deptdata.isEmpty() == true) 
@@ -149,16 +166,19 @@
 				
 						<tr><th>Manager ID</th><th>Depatment Name</th><th>Salary</th><th>Delete Rows</th></tr>
 					
-						<%Iterator itr;
-						for (itr=managersdata.iterator(); itr.hasNext(); )
+						
+						<%
+						Iterator itr = managersdata.iterator();					
+						while (itr.hasNext())
 						{
-						%>
+						 	String mgid = (String)itr.next();
+						 	%>
 							<tr>
-								<td width="150"><%=itr.next()%></td>							
-								<td width="170"><%=itr.next()%></td>									
-								<td width="150"><%=itr.next()%></td>
-								<td><a href=deleteData?mgid=<%=managersdata.get(0) %>> Delete </a></td>								
-							</tr>
+								<td><%=mgid%></td>
+								<td><%=itr.next()%></td>
+								<td><%=itr.next()%></td>
+								<td><a href=deleteData?mgid=<%=mgid%>> Delete </a></td>					
+							</tr>						
 						<%}%>					
 					</table>
 					<%if (managersdata.isEmpty() == true) 

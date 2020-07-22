@@ -36,13 +36,16 @@ public class FetchData extends HttpServlet {
 			//------------- CreateTable.jsp-----------------------
 			String createtable=request.getParameter("crete");
 			String createtablequery=request.getParameter("createtablequery");
-			String creatquery=request.getParameter("message");
-			
+			String creatquery=request.getParameter("message");			
 			//------------- CreateTable.jsp-----------------------
 			//------------- deleterows.jsp-----------------------
 			String deletedata=request.getParameter("delte");
 			String deletevalue = request.getParameter("id");
 			//------------- deleterows.jsp-----------------------
+			//------------- droptable.jsp-----------------------
+			String droptable=request.getParameter("dropt");
+			String droptableemp=request.getParameter("dropemp");
+			//------------- droptable.jsp-----------------------
 			//------------- update_reocrd.jsp-----------------------
 			String editdata=request.getParameter("updte");			
 			String editbutton = request.getParameter("editbutton");
@@ -98,7 +101,8 @@ public class FetchData extends HttpServlet {
 			System.out.println("\n I am step 3");
 			
 			if (truncdata == null && insertdata == null && deletedata == null && editdata == null 
-					&& editbutton == null && createtable == null && createtablequery == null)
+					&& editbutton == null && createtable == null && createtablequery == null
+					&& droptable == null)
 			{
 				if (cstdata != null)
 				{
@@ -106,16 +110,21 @@ public class FetchData extends HttpServlet {
 					//al.add("DEPT");
 					//al.add("MANAGERS");
 					System.out.println("\n Before Query");
-					ps1=conn.prepareStatement("select table_name from all_tables where (table_name IN ('EMP','DEPT_NEW','MANAGERS','TESTERDATA') and OWNER ='HR')");
+					ps1=conn.prepareStatement(" select table_name from all_tables where table_name IN ('EMP','DEPT_NEW','MANAGERS') and OWNER ='HR'\r\n" + 
+							"Union\r\n" + 
+							"select object_name from all_objects where trunc(created)>= '19-jul-2020' \r\n" + 
+							"and owner = 'HR' and object_type = 'TABLE' \r\n" + 
+							"order by table_name asc");
 					System.out.println("\n After Query");
 					ResultSet rs3=ps1.executeQuery();
 					System.out.println("\n After execute query");
-					System.out.println("\n rs3.next():" +rs3.next());
-					//System.out.println("\n rs3.getString(1): " +rs3.getString("table_name"));
+					//System.out.println("\n rs3.next():" +rs3.next());
+										
 					while (rs3.next()) 
 					{		
 						//Add records into data list
-						dataList.add(rs3.getString("table_name"));						
+						dataList.add(rs3.getString(1));
+						System.out.println("\n rs3.getString(1): " +rs3.getString(1));
 					}// while rs3 closed here
 					
 					//System.out.println("\n rs3.getString(1): " +rs3.getString(1));
@@ -230,7 +239,7 @@ public class FetchData extends HttpServlet {
 					System.out.println("\nand the truncallmngrrecord is: " +truncallmngrrecord);
 					if (((emptable == null) && (depttable == null) && (managerstable == null)) && tableFlag == 0 
 							&& truncallmngrrecord == null && truncalldeptrecord == null && truncallemprecord == null 
-							&& addrowemp == null && addrowdept == null && addrowmngr == null)
+							&& addrowemp == null && addrowdept == null && addrowmngr == null && droptableemp == null)
 					{
 						response.setContentType("text/html");
 						System.out.println("\n I am @ line 196 Inside");
@@ -316,9 +325,9 @@ public class FetchData extends HttpServlet {
 						}// tableFlag == 0 closed here line 192
 			} // truncdata and insertdata is null is closed here
 			
-			if (truncdata != null)
+			if (truncdata != null || droptable != null)
 			{
-				System.out.println("\nI am here in truncdata");
+				System.out.println("\nI am here in truncdata-droptable");
 				
 				if (((emptable != null) && (depttable != null) && (managerstable != null)) ||
 						((emptable != null) && (depttable != null)) ||
@@ -479,7 +488,14 @@ public class FetchData extends HttpServlet {
 				
 								if (Flag ==1)
 								{
-									nextJSP = "/truncatedetails.jsp";
+									if (droptable != null) 
+										{
+											nextJSP = "/dropdetails.jsp";
+										}
+									else
+										{
+											nextJSP = "/truncatedetails.jsp";
+										}									
 									request.setAttribute("empdata", dataList);				  
 									RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;							
 									dispatcher.forward(request,response);
@@ -530,6 +546,20 @@ public class FetchData extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
 				rd.include(request, response);			
 			}//End of truncallmngrrecord button code
+			if (droptableemp != null)
+			{
+				System.out.println("\nI am here in droptableemp");				
+				PreparedStatement ps4=conn.prepareStatement("drop table emp");
+				ResultSet rs4=ps4.executeQuery();
+				response.setContentType("text/html");
+				System.out.println("\n I am @ line 555 Inside");
+				PrintWriter pw=response.getWriter();				
+				pw.println("<script type=\"text/javascript\">");
+				pw.println("alert('Table removed successfully');");
+				pw.println("</script>");
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+				rd.include(request, response);			
+			}//End of truncallemprecord button code
 			
 			if (insertdata != null)
 			{
@@ -1000,6 +1030,7 @@ public class FetchData extends HttpServlet {
 									else
 									{	
 										nextJSP = "/deleterows.jsp";
+										System.out.println("\n I am here at line 1033 after /deleterows.jsp");
 									}
 									request.setAttribute("empdata", dataList);				  
 									RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;							

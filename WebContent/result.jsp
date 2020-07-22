@@ -39,29 +39,11 @@
 				<h4 style="color:indigo;">Please select one table ,</h4>
 				<h4 style="color:indigo;">before clicking on below buttons.</h4>
 				<h5 style="color:orangered;">Please select one table at a time.</h5>
-				
-				<%-- 
-				<table border="1" style="width:70%;">
-					<tr><th>Table Name</th></tr>
-					<%Iterator itr;
-					for (itr=tablelist.iterator(); itr.hasNext(); )
-					{
-						%>
-						<tr>
-							<center>
-								<td width="70"><%=itr.next()%></td>								
-							</center>
-						</tr>
-					<%}%>
-					
-				</table><br /><br />	--%>			
-				
-				
-				
-				 <input type = "checkbox"  value="empdata" name="emp" /><%=tablelist.get(0)%><br />
-				<input type = "checkbox"  value="deptdata" name="dept" /><%=tablelist.get(1)%><br />
-				<input type = "checkbox"  value="managerdata" name="managers" /><%=tablelist.get(2)%><br /><br />
-				<input type = "checkbox"  value="testerdata" name="tester" /><%=tablelist.get(3)%><br /><br />
+											
+				<input type = "checkbox"  value="deptdata" name="dept" /><%=tablelist.get(0)%><br />
+				<input type = "checkbox"  value="empdata" name="emp" /><%=tablelist.get(1)%><br />				
+				<input type = "checkbox"  value="managerdata" name="managers" /><%=tablelist.get(2)%><br />
+				<input type = "checkbox"  value="testerdata" name="testers" /><%=tablelist.get(3)%><br /><br />
 				
 				<input type = "submit" value = "View Records"  /><br /><br />
 				<input type = "submit" value = "Add Table"  /><br /><br />
@@ -69,9 +51,7 @@
 				<input type="submit" value="Insert Records" name="insrt" /><br /><br />
 				<input type="submit" value="Update Records" name="updte" /><br /><br />
 				<input type="submit" value="Delete Records" name="delte" /><br /><br />				
-				<input type="submit" value="Drop Table" name="dropt" /><br /><br />
-				
-				
+				<input type="submit" value="Drop Table" name="dropt" /><br /><br />				
 		</form>									
 			<%}%>	
 		<%-- <form action="InsertRows" method="post">	
