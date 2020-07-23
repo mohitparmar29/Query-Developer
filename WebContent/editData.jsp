@@ -5,16 +5,27 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style> 
+        .inputClass { 
+            pointer-events: none;  
+        } 
+        </style> 
 </head>
 <body>
-<jsp:include page="update_record.jsp"></jsp:include>
-<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
+				<jsp:include page="update_record.jsp"></jsp:include>
 				
-				EMPLOYEE NUMBER:<input type="text" name="empid_edt" id="empid_edt" /><br/>
+				<form action="FetchData" method="post">
+				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">				
+				
+				EMPLOYEE NUMBER:<input type="text" name="empid_edt" id="empid_edt" style="pointer-events: none;" readonly><br/>				
 				Employee Name:	<input type="text" name="empname_edt" id="empname_edt" /><br/>
 				Salary:			<input type="text" name="sal_edt" id="sal_edt" /><br/><br/>
 								
 				<input type="submit" name="editbutton" value="EDIT ROW" onclick="editRow();" /></p>
+				</form>
+				
+				
+				
 				<script>				
 				var table = document.getElementById("myTableEmp"),rIndex;
 				
@@ -26,6 +37,7 @@
 						console.log(rIndex);
 						
 						document.getElementById("empid_edt").value = this.cells[0].innerHTML;
+						//document.getElementById("empid_edt").readOnly = true;
 						document.getElementById("empname_edt").value = this.cells[1].innerHTML;
 						document.getElementById("sal_edt").value = this.cells[2].innerHTML;
 					};

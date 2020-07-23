@@ -40,11 +40,11 @@ public class editData extends HttpServlet {
 	        //Statement st = conn.createStatement();
 	        PreparedStatement ps1=null;
 	        
-	        System.out.println("\n I am at 38 for value is: "+valuemngr);
+	        System.out.println("\n I am at 38 for value is: "+valueemp);
 	        
 	        if (valueemp != null) 
 	        {    	        
-	        System.out.println("\n I am inside valueemp at not null where value is: "+valueemp);
+	        System.out.println("\n I am inside editData.java where valueemp is: "+valueemp);
 	        ps1=conn.prepareStatement("select * from emp where empid=" + valueemp);
 	        //st.executeQuery("select * from emp WHERE empid=" + valueemp);
 	        

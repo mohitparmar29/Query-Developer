@@ -45,6 +45,8 @@ public class FetchData extends HttpServlet {
 			//------------- droptable.jsp-----------------------
 			String droptable=request.getParameter("dropt");
 			String droptableemp=request.getParameter("dropemp");
+			String droptabledept=request.getParameter("dropdept");
+			String droptablemngr=request.getParameter("dropmngr");
 			//------------- droptable.jsp-----------------------
 			//------------- update_reocrd.jsp-----------------------
 			String editdata=request.getParameter("updte");			
@@ -239,7 +241,8 @@ public class FetchData extends HttpServlet {
 					System.out.println("\nand the truncallmngrrecord is: " +truncallmngrrecord);
 					if (((emptable == null) && (depttable == null) && (managerstable == null)) && tableFlag == 0 
 							&& truncallmngrrecord == null && truncalldeptrecord == null && truncallemprecord == null 
-							&& addrowemp == null && addrowdept == null && addrowmngr == null && droptableemp == null)
+							&& addrowemp == null && addrowdept == null && addrowmngr == null 
+							&& droptableemp == null && droptabledept == null && droptablemngr == null)
 					{
 						response.setContentType("text/html");
 						System.out.println("\n I am @ line 196 Inside");
@@ -440,7 +443,7 @@ public class FetchData extends HttpServlet {
 				
 								if (emptable != null) 
 								{
-									System.out.println("\n I am at 369");
+									System.out.println("\n I am at 446");
 									ResultSet rs1=ps1.executeQuery();
 									while (rs1.next()) 
 									{
@@ -470,7 +473,14 @@ public class FetchData extends HttpServlet {
 								//out.println("</table></center></body></html>");
 								if (managersFlag ==1)
 								{
-									nextJSP = "/truncatedetails.jsp";				  
+									if (droptable != null) 
+									{
+										nextJSP = "/dropdetails.jsp";
+									}
+									else
+									{
+										nextJSP = "/truncatedetails.jsp";
+									}				  
 									request.setAttribute("managersdata", dataList);
 									RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;
 									dispatcher.forward(request,response);
@@ -479,7 +489,14 @@ public class FetchData extends HttpServlet {
 								}//managersFlag ==1 closed here
 								if (deptFlag ==1)
 								{
-									nextJSP = "/truncatedetails.jsp";				  
+									if (droptable != null) 
+									{
+										nextJSP = "/dropdetails.jsp";
+									}
+									else
+									{
+										nextJSP = "/truncatedetails.jsp";
+									}				  
 									request.setAttribute("deptdata", dataList);
 									RequestDispatcher dispatcher = request.getRequestDispatcher(nextJSP) ;							
 									dispatcher.forward(request,response);
@@ -559,7 +576,35 @@ public class FetchData extends HttpServlet {
 				pw.println("</script>");
 				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
 				rd.include(request, response);			
-			}//End of truncallemprecord button code
+			}//End of droptableemp button code
+			if (droptabledept != null)
+			{
+				System.out.println("\nI am here in droptableemp");				
+				PreparedStatement ps4=conn.prepareStatement("drop table dept_new");
+				ResultSet rs4=ps4.executeQuery();
+				response.setContentType("text/html");
+				System.out.println("\n I am @ line 583 Inside");
+				PrintWriter pw=response.getWriter();				
+				pw.println("<script type=\"text/javascript\">");
+				pw.println("alert('Table removed successfully');");
+				pw.println("</script>");
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+				rd.include(request, response);			
+			}//End of droptabledept button code
+			if (droptablemngr != null)
+			{
+				System.out.println("\nI am here in droptablemngr");				
+				PreparedStatement ps4=conn.prepareStatement("drop table managers");
+				ResultSet rs4=ps4.executeQuery();
+				response.setContentType("text/html");
+				System.out.println("\n I am @ line 597 Inside");
+				PrintWriter pw=response.getWriter();				
+				pw.println("<script type=\"text/javascript\">");
+				pw.println("alert('Table removed successfully');");
+				pw.println("</script>");
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+				rd.include(request, response);			
+			}//End of droptablemngr button code
 			
 			if (insertdata != null)
 			{
@@ -676,7 +721,7 @@ public class FetchData extends HttpServlet {
 				
 								if (emptable != null) 
 								{
-									System.out.println("\n I am at 369");
+									System.out.println("\n I am at 724");
 									ResultSet rs1=ps1.executeQuery();
 									while (rs1.next()) 
 									{
@@ -961,7 +1006,7 @@ public class FetchData extends HttpServlet {
 				
 								if (emptable != null) 
 								{
-									System.out.println("\n I am at 369");
+									System.out.println("\n I am at 1009");
 									ResultSet rs1=ps1.executeQuery();
 									while (rs1.next()) 
 									{
@@ -1042,20 +1087,20 @@ public class FetchData extends HttpServlet {
 			}// End of delete data & editdata
 			if (editbutton != null) 
 			{
-				String sql = "Update EMP set EMPNAME=?,SALARY=? where EMPID=? ";						
+				String sql = "update EMP set EMPNAME=?,SALARY=? where EMPID=? ";						
 				ps2=conn.prepareStatement(sql);
-				ps2.setString(1,empid_edt);  
-		        ps2.setString(2,empname_edt);        
-		        ps2.setString(3,sal_edt);
+				ps2.setString(1,empname_edt);        
+		        ps2.setString(2,sal_edt);
+		        ps2.setString(3,empid_edt);
 		        ps2.executeUpdate();	        
 				System.out.println("\n And empid is : "+empid_edt);
 				System.out.println("\n And empname is : "+empname_edt);
 				System.out.println("\n And sal is : "+sal_edt);
-				System.out.println("\n And ps2.executeUpdate() is : "+ps2.executeUpdate());
-				System.out.println("\n And ps2.toString() is : "+ps2.toString());
+				//System.out.println("\n And ps2.executeUpdate() is : "+ps2.executeUpdate());
+				//System.out.println("\n And ps2.toString() is : "+ps2.toString());
 				//int i=ps2.executeUpdate();
 				response.setContentType("text/html");
-				System.out.println("\n I am @ line 133 Inside");
+				System.out.println("\n I am @ line 1103 Inside");
 				PrintWriter pw1=response.getWriter();				
 				pw1.println("<script type=\"text/javascript\">");
 				pw1.println("alert('Records Updated successfully!');");

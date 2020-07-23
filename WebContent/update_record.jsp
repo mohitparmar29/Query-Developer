@@ -80,22 +80,22 @@
 				<table  id="myTableEmp" align="right" style="width:70%">
 				
 					<tr><th>EMPLOYEE NUMBER</th><th>EMPLOYEE NAME</th><th>SALARY</th></tr>
-					<%Iterator itr;
-					for (itr=empdata.iterator(); itr.hasNext(); )
+					<%
+					Iterator itr = empdata.iterator();
+					
+					while (itr.hasNext())
 					{
-						%>
+					 	String empid = (String)itr.next();				
+					%>
 						<tr>
-							<center>
-								<td width="140"><%=itr.next()%></td>
-								<td width="180"><%=itr.next()%></td>
-								<td width="168"><%=itr.next()%></td>
-								<td><a href=editData?empid_edt=<%=empdata.get(0) %>> Edit </a></td>								
-							</center>
+							<td><%=empid%></td>
+							<td><%=itr.next()%></td>
+							<td><%=itr.next()%></td>
+							<td><a href=editData?empid_edt=<%=empid%>> Edit </a></td>					
 						</tr>
+						
 					<%}%>
-				</table>
-				
-				
+				</table>				
 				<%if (empdata.isEmpty() == true) 
 				{%>
 				<p style="font-family:courier;color:orange red;font-size:110%;float:right;width:60%;">

@@ -86,22 +86,16 @@
 				if (deptdata.isEmpty() == false) 
 				{%>				
 					<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-					Query Used To Truncate Table Record:</p>
+					Query Used To Drop Table:</p>
 				
 					<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
-					truncate table dept_new;</p>
+					drop table dept_new;</p>
 				
 					<p style="font-family:courier;float:right;width:70%;color:darkmagenta;font-size:80%;">
-					Note: The SQL TRUNCATE TABLE statement is used to remove all records from a table.If you want to remove all below records.Click Here->
+					Note: The SQL DROP TABLE statement is used to remove the table.If you want to remove table from database.Click Here->
 					
-					<input type="submit" value="Truncate Table" name="truncdept"/></p>
+					<input type="submit" value="Drop Table" name="dropdept"/></p>
 					
-				<%}
-				
-				else
-				{%>
-					<p style="font-family:courier;color:orange red;font-size:180%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:70%;">
-					Department Table is empty. Please insert some data to perform truncate operation.</p>	
 				<%}%>	
 				
 				<table border="1" align="right" style="width:70%">
@@ -123,7 +117,7 @@
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/>
+				<input type="submit" value="Drop Table" name="dropt"/>
 
 			<%} %><%--End Department CheckBox Code--%>
 
@@ -135,22 +129,15 @@
 				if (managersdata.isEmpty() == false) 
 				{%>				
 					<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-					Query Used To Truncate Table Record:</p>
+					Query Used To Drop Table:</p>
 				
 					<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
-					truncate table managers;</p>
+					drop table managers;</p>
 				
 					<p style="font-family:courier;float:right;width:70%;color:darkmagenta;font-size:80%;">
-					Note: The SQL TRUNCATE TABLE statement is used to remove all records from a table.If you want to remove all below records.Click Here->
+					Note: The SQL DROP TABLE statement is used to remove the table.If you want to remove table from database.Click Here->
 					
-					<input type="submit" value="Truncate Table" name="truncmngr"/></p>
-					
-				<%}
-				
-				else
-				{%>
-					<p style="font-family:courier;color:orange red;font-size:180%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:70%;">
-					Managers Table is empty. Please insert some data to perform truncate operation.</p>	
+					<input type="submit" value="Drop Table" name="dropmngr"/></p>
 				<%}%>
 								
 				<table border="1" align="right" style="width:70%">
@@ -171,7 +158,7 @@
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
 				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/>	
+				<input type="submit" value="Drop Table" name="dropt"/>	
 			<%} %><%--End Managers CheckBox Code--%>
 		</form><br />
 		<form action="index.jsp">
