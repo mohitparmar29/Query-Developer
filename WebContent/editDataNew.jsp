@@ -53,6 +53,13 @@
 				<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
 				update EMP set empname=value of empname,salary=value of salary where EMPID = value of empid;</p>
 								
+				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">				
+				
+				EMPLOYEE NUMBER:<input type="text" name="empid_edt" id="empid_edt" style="pointer-events: none;" readonly><br/>				
+				Employee Name:	<input type="text" name="empname_edt" id="empname_edt" /><br/>
+				Salary:			<input type="text" name="sal_edt" id="sal_edt" /><br/><br/>
+								
+				<input type="submit" name="editbutton" value="EDIT ROW" onclick="editRow();" /></p>
 												
 				<table  id="myTableEmp" align="right" style="width:70%">
 				

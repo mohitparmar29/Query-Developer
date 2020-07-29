@@ -7,7 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body bgcolor="#E6E6FA"'>
+<body bgcolor="#a3ddc4"'>
 		<style>
 			table, th, td
 			{
@@ -24,9 +24,12 @@
 			}
 			table
 			{
-  				background-color: #F5FFFA;
+  				background-color: #FFDEAD;
 			}
 		</style>
+		<center>
+		<h1 style="background-color:powderblue;color:red;">Truncate Records From Table</h1>
+		</center>
 		<form action="FetchData" method="post">
 		<% 			
 			//Array List creation for EMP , DEPT and Managers
@@ -44,13 +47,13 @@
 				if (empdata.isEmpty() == false) 
 				{%>				
 					<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-					Query Used To Truncate Table Record:</p>
+					<b><U>Query Used To Truncate Table Record:</U></b></p>
 				
-					<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
+					<p style="font-family:courier;background-color:maroon;color:ivory;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
 					truncate table emp;</p>
 				
-					<p style="font-family:courier;float:right;width:70%;color:darkmagenta;font-size:80%;">
-					Note: The SQL TRUNCATE TABLE statement is used to remove all records from a table.If you want to remove all below records.Click Here->
+					<p style="font-family:courier;color:darkgreen;background-color:wheat;font-size:94%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:68%;">
+					<b>Note:</b> The SQL TRUNCATE TABLE statement is used to remove all records from a table.If you want to remove all below records.Click Here->
 					
 					<input type="submit" value="Truncate Table" name="truncemp"/></p>
 					
@@ -78,12 +81,20 @@
 					<%}%>
 				</table>
 				
-				<h4>Table List:</h4>
-				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />
+				<table><tr><th style="background-color: gold;color: olivedrab;">
+				<h4 style="background-color:powderblue;color:red;">Table List:</h4> 
+				<h4 style="color:indigo;">Please select one table ,</h4>
+				<h4 style="color:indigo;">before clicking on below buttons.</h4>
+				<h5 style="color:orangered;">Please select one table at a time.</h5>
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
-				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/>
+				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />				
+				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />				
+				<input type = "submit" value = "View Records"  /><br /><br />
+				<input type="submit" value="Truncate Table" name="trunc" /><br /><br />					
+				<form action="index.jsp">
+					<input type="submit" value="HOME" />
+				</form> 
+				</th></tr></table>
 
 			<%}%> <%--End EMP CheckBox Code--%>
 			<%--Start Department CheckBox Code--%>
@@ -94,13 +105,13 @@
 				if (deptdata.isEmpty() == false) 
 				{%>				
 					<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-					Query Used To Truncate Table Record:</p>
+					<b><U>Query Used To Truncate Table Record:</U></b></p>
 				
-					<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
-					truncate table dept_new;</p>
+					<p style="font-family:courier;background-color:maroon;color:ivory;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
+					truncate table dept;</p>
 				
-					<p style="font-family:courier;float:right;width:70%;color:darkmagenta;font-size:80%;">
-					Note: The SQL TRUNCATE TABLE statement is used to remove all records from a table.If you want to remove all below records.Click Here->
+					<p style="font-family:courier;color:orange red;font-size:94%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:68%;">
+					<b>Note:</b> The SQL TRUNCATE TABLE statement is used to remove all records from a table.If you want to remove all below records.Click Here->
 					
 					<input type="submit" value="Truncate Table" name="truncdept"/></p>
 					
@@ -126,12 +137,20 @@
 					<%}%>
 				</table>
 				
-				<h4>Table List:</h4>
-				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />
+				<table><tr><th style="background-color: gold;color: olivedrab;">
+				<h4 style="background-color:powderblue;color:red;">Table List:</h4> 
+				<h4 style="color:indigo;">Please select one table ,</h4>
+				<h4 style="color:indigo;">before clicking on below buttons.</h4>
+				<h5 style="color:orangered;">Please select one table at a time.</h5>
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
-				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/>
+				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />				
+				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />				
+				<input type = "submit" value = "View Records"  /><br /><br />
+				<input type="submit" value="Truncate Table" name="trunc" /><br /><br />					
+				<form action="index.jsp">
+					<input type="submit" value="HOME" />
+				</form> 
+				</th></tr></table>
 
 			<%} %><%--End Department CheckBox Code--%>
 
@@ -143,13 +162,13 @@
 				if (managersdata.isEmpty() == false) 
 				{%>				
 					<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-					Query Used To Truncate Table Record:</p>
+					<b><U>Query Used To Truncate Table Record:</U></b></p>
 				
-					<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
+					<p style="font-family:courier;background-color:maroon;color:ivory;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
 					truncate table managers;</p>
 				
-					<p style="font-family:courier;float:right;width:70%;color:darkmagenta;font-size:80%;">
-					Note: The SQL TRUNCATE TABLE statement is used to remove all records from a table.If you want to remove all below records.Click Here->
+					<p style="font-family:courier;color:orange red;font-size:94%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:68%;">
+					<b>Note:</b> The SQL TRUNCATE TABLE statement is used to remove all records from a table.If you want to remove all below records.Click Here->
 					
 					<input type="submit" value="Truncate Table" name="truncmngr"/></p>
 					
@@ -174,16 +193,21 @@
 						</tr>
 					<%}%>
 				</table>
-				<h4>Table List:</h4>
-				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />
+				<table><tr><th style="background-color: gold;color: olivedrab;">
+				<h4 style="background-color:powderblue;color:red;">Table List:</h4> 
+				<h4 style="color:indigo;">Please select one table ,</h4>
+				<h4 style="color:indigo;">before clicking on below buttons.</h4>
+				<h5 style="color:orangered;">Please select one table at a time.</h5>
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
-				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/>	
+				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />				
+				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />				
+				<input type = "submit" value = "View Records"  /><br /><br />
+				<input type="submit" value="Truncate Table" name="trunc" /><br /><br />					
+				<form action="index.jsp">
+					<input type="submit" value="HOME" />
+				</form> 
+				</th></tr></table>	
 			<%} %><%--End Managers CheckBox Code--%>
-		</form><br />
-		<form action="index.jsp">
-			<input type="submit" value="HOME" />
-		</form>
+		</form><br />		
 	</body>
 </html>

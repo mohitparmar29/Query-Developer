@@ -5,14 +5,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<style>
-            
-            .container{overflow: hidden}
-            .tab{float: left;}
-            .tab-2{margin-left: 50px}
-            .tab-3{margin-left: 50px}
-            .tab-1 input{display: block;margin-bottom: 10px}            
-            
+<style>            
+  .container{overflow: hidden}
+  .tab{float: left;}
+  .tab-2{margin-left: 60px}
+  .tab-3{margin-left: 60px}
+  .tab-1 input{display: block;margin-bottom: 10px;width: 32.33%;}
+  .vl {border: 20px solid brown;height: 450px;}
  </style>
 </head>
 <body bgcolor="wheat">
@@ -22,11 +21,11 @@
 		</center>
 		<form action="index.jsp">
 			<input type="submit" value="HOME" />
-		</form>	
-			<p style="border-style:dotted solid;border-color: #800080 #800080;width:10%;font-family:courier;color:maroon;font-size:120%;">STEP -1</p>
+		</form><br /><br />
+		<div class="vl">	
+			<p style="border-style:dotted solid;float:center;border-color: #800080 #800080;width:15%;font-family:courier;color:maroon;font-size:120%;">STEP -1</p>
 			<h4 style="color:blue;">Enter the Table Name:<input type="text" id="tablename"/></h4><br />
-		
-		
+		<hr>		
 		<div class="container">						
             <div class="tab tab-1">
             	<p style="border-style:dotted solid;border-color: #800080 #800080;width:55%;font-family:courier;color:maroon;font-size:120%;">STEP -2</p><br/>
@@ -61,6 +60,7 @@
                 <input type="submit" value="Create Table" name="createtablequery" /><br /><br />
                 </form>                
             </div>            
+        </div>
         </div>		
         
 		<script>		

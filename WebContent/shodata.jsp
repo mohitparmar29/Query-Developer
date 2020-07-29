@@ -24,7 +24,7 @@
 			}
 			table
 			{
-  				background-color: #e495e4;
+  				background-color: #FFDEAD;
 			}
 		</style>
 		<form action="FetchData" method="post">
@@ -42,10 +42,10 @@
 			<% 
 			if (empdata != null) 
 			{%>
-				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:120%;">
+				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
 				Query Used To Select Table Record:</p>
 				<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
-				select * from emp order by empid;</p><br /><br />
+				select * from emp order by empid;</p>
 				
 				<table border="1" align="right" style="width:70%;">
 					<tr><th>EMPLOYEE NUMBER</th><th>EMPLOYEE NAME</th><th>SALARY</th></tr>
@@ -69,28 +69,34 @@
 				<h4 style="color:indigo;">Please select one table ,</h4>
 				<h4 style="color:indigo;">before clicking on below buttons.</h4>
 				<h5 style="color:orangered;">Please select one table at a time.</h5>
-				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
-				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
+				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />				
+				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />				
 				<input type = "submit" value = "View Records"  /><br /><br />
 				<input type="submit" value="Truncate Table" name="trunc" /><br /><br />
 				<input type="submit" value="Insert Records" name="insrt" /><br /><br />
-				<input type="submit" value="Update Records" name="updte" /><br /><br />
+				<input type="submit" value="Modify Records" name="updte" /><br /><br />
 				<input type="submit" value="Delete Records" name="delte" /><br /><br />				
-				<input type="submit" value="Drop Table" name="dropt" /><br /><br />
-				<input type="submit" value="Create Table" name="crete" /><br /><br />
+				<input type="submit" value="Drop Table" name="dropt" /><br /><br />				
+				<form action="CreateTable.jsp">
+					<input type="submit" value="Create Table" /><br /><br />
+				</form>	
+				<form action="index.jsp">
+					<input type="submit" value="HOME" />
+				</form> 
 				</th></tr></table>
+				
 
 			<%}%> <%--End EMP CheckBox Code--%>
+			
 			<%--Start Department CheckBox Code--%>
 			<%
 			//out.println(deptdata);
 			if (deptdata != null) 
 			{%>
-				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:120%;">
+				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
 				Query Used To Select Table Record:</p>
-				
-				<p style="font-family:courier;color:orange red;font-size:120%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:70%;">
+				<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
 				select * from dept_new order by department_id;</p>	
 				
 				<table border="1" align="right" style="width:70%">
@@ -107,16 +113,28 @@
 					<%}%>
 				</table>
 				
-				<h4>Table List:</h4>
-				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />
+				<table><tr><th style="background-color: gold;color: olivedrab;">
+				<h4 style="background-color:powderblue;color:red;">Table List:</h4> 
+				<h4 style="color:indigo;">Please select one table ,</h4>
+				<h4 style="color:indigo;">before clicking on below buttons.</h4>
+				<h5 style="color:orangered;">Please select one table at a time.</h5>
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
-				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/><br /><br />
-				<input type="submit" value="Insert Data into Table" name="insrt"/><br /><br />				
+				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />				
+				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />				
+				<input type = "submit" value = "View Records"  /><br /><br />
+				<input type="submit" value="Truncate Table" name="trunc" /><br /><br />
+				<input type="submit" value="Insert Records" name="insrt" /><br /><br />
+				<input type="submit" value="Modify Records" name="updte" /><br /><br />
 				<input type="submit" value="Delete Records" name="delte" /><br /><br />				
-				<input type="submit" value="Drop Table" name="dropt" /><br /><br />
-				<input type="submit" value="Create Table" name="crete" /><br /><br />
+				<input type="submit" value="Drop Table" name="dropt" /><br /><br />				
+				<form action="CreateTable.jsp">
+					<input type="submit" value="Create Table" /><br /><br />
+				</form>	
+				<form action="index.jsp">
+					<input type="submit" value="HOME" />
+				</form> 
+				</th></tr></table>
+				
 
 			<%} %><%--End Department CheckBox Code--%>
 
@@ -125,10 +143,9 @@
 				//out.println(managerdata);
 			if (managersdata != null)
 			{%>
-				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:120%;">
+				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
 				Query Used To Select Table Record:</p>
-				
-				<p style="font-family:courier;color:orange red;font-size:120%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:70%;">
+				<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
 				select * from managers order by mngrid;</p>
 				
 				<table border="1" align="right" style="width:70%">
@@ -144,20 +161,28 @@
 						</tr>
 					<%}%>
 				</table>
-				<h4>Table List:</h4>
-				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />
+				<table><tr><th style="background-color: gold;color: olivedrab;">
+				<h4 style="background-color:powderblue;color:red;">Table List:</h4> 
+				<h4 style="color:indigo;">Please select one table ,</h4>
+				<h4 style="color:indigo;">before clicking on below buttons.</h4>
+				<h5 style="color:orangered;">Please select one table at a time.</h5>
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
-				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Truncate Table" name="trunc"/><br /><br />
-				<input type="submit" value="Insert Data into Table" name="insrt"/><br /><br />
+				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />				
+				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />				
+				<input type = "submit" value = "View Records"  /><br /><br />
+				<input type="submit" value="Truncate Table" name="trunc" /><br /><br />
+				<input type="submit" value="Insert Records" name="insrt" /><br /><br />
+				<input type="submit" value="Modify Records" name="updte" /><br /><br />
 				<input type="submit" value="Delete Records" name="delte" /><br /><br />				
-				<input type="submit" value="Drop Table" name="dropt" /><br /><br />
-				<input type="submit" value="Create Table" name="crete" /><br /><br />	
+				<input type="submit" value="Drop Table" name="dropt" /><br /><br />				
+				<form action="CreateTable.jsp">
+					<input type="submit" value="Create Table" /><br /><br />
+				</form>	
+				<form action="index.jsp">
+					<input type="submit" value="HOME" />
+				</form> 
+				</th></tr></table>					
 			<%} %><%--End Managers CheckBox Code--%>
-		</form><br />
-		<form action="index.jsp">
-			<input type="submit" value="HOME" />
-		</form>
+		</form><br />		
 	</body>
 </html>

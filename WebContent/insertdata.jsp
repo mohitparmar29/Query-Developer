@@ -9,7 +9,7 @@
 <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="functions.js"></script>
 </head>
-<body bgcolor="#E6E6FA"'>
+<body bgcolor="#a3ddc4"'>
 		<style>
 			table, th, td
 			{
@@ -26,7 +26,13 @@
 			}
 			table
 			{
-  				background-color: #F5FFFA;
+  				background-color: #FFDEAD;
+			}
+			.column
+			{
+  				float: right;  				
+  				padding: 5px;
+  				width:60%;  				
 			}
 		</style>
 		<script>					
@@ -63,7 +69,9 @@
 						var cell4 = row.insertCell(3);
 						}
 					</script>
-					
+		<center>
+		<h1 style="background-color:powderblue;color:red;">Insert Records Into Table</h1>
+		</center>			
 		<form action="FetchData" method="post">
 		<% 			
 			//Array List creation for EMP , DEPT and Managers
@@ -78,19 +86,28 @@
 			<% 
 			if (empdata != null) 
 			{%>
+				
 				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-				Query Used To Insert Data into Table:</p>
+				<b><U>Query Used To Insert Data into Table:</U></b></p>
 			
-				<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
+				<p style="font-family:courier;background-color:maroon;color:ivory;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
 				Insert into EMP (EMPID,EMPNAME,SALARY) values(value of column1,value of column2,value of column3);</p>
 				
-				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
+				<p style="font-family:courier;font-size:94%;background-color:wheat;border-color: #1E90FF #FF0000;border-style:dotted; float:right;width:68%;color:darkgreen">
+					<b><U>Note:</U></b> To add records in EMP table , Please enter the data in below fields and click ADD ROW button.</p>
 				
-				EMPLOYEE NUMBER:<input type="text" name="empid" id="empid" /><br/>
-				Employee Name:	<input type="text" name="empname" id="empname" /><br/>
-				Salary:			<input type="text" name="sal" id="sal" /><br/><br/>
+				<div class="column">
+				<b><p style="font-family:courier;text-align:left;width:50%;color:navy;font-size:90%;">					
+				
+				<label for="enum">Employee Number:</label>
+				<input size="25" type="text" name="empid" value="" placeholder="Enter Employee Number" id="empid" /><br />
+				<label for="ename">Employee Name:</label>
+				<input size="25" type="text" name="empname" placeholder="Enter Employee Name" id="empname" /><br />
+				<label for="esal">Salary:</label><br />
+				<input size="25" type="text" name="sal" placeholder="Enter Salary" id="sal" /><br /><br />					
 								
-				<input type="submit" name="addrowemp" value="ADD ROW" onclick="AddRowEmp()" /></p>
+				<input type="submit" name="addrowemp" value="ADD ROW" onclick="AddRowEmp()" /></p></b>
+				</div>
 				
 				<table  id="myTableEmp" align="right" style="width:70%">
 				
@@ -109,12 +126,20 @@
 					<%}%>
 				</table>
 				
-				<h4>Table List:</h4>
-				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />
+				<table><tr><th style="background-color: gold;color: olivedrab;">
+				<h4 style="background-color:powderblue;color:red;">Table List:</h4> 
+				<h4 style="color:indigo;">Please select one table ,</h4>
+				<h4 style="color:indigo;">before clicking on below buttons.</h4>
+				<h5 style="color:orangered;">Please select one table at a time.</h5>
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
-				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-				<input type = "submit" value = "Show Table Data" /><br /><br />				
-				<input type="submit" value="Insert Data into Table" name="insrt"/>
+				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />				
+				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />				
+				<input type = "submit" value = "View Records"  /><br /><br />				
+				<input type="submit" value="Insert Records" name="insrt"/><br /><br />
+				<form action="index.jsp">
+					<input type="submit" value="HOME" />
+				</form><br /><br /> 
+				</th></tr></table>
 
 			<%}%> <%--End EMP CheckBox Code--%>
 			<%--Start Department CheckBox Code--%>
@@ -123,19 +148,24 @@
 			if (deptdata != null) 
 			{%>
 				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-				Query Used To Insert Data into Table:</p>
+				<b><U>Query Used To Insert Data into Table:</U></b></p>
 			
-				<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
+				<p style="font-family:courier;background-color:maroon;color:ivory;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:60%;">
 				Insert into dept_new (DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID) values(value of column1,value of column2,value of column3,value of column4);</p>
 				
-				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
+				<p style="font-family:courier;font-size:94%;background-color:wheat;border-color: #1E90FF #FF0000;border-style:dotted; float:right;width:68%;color:darkgreen">
+					<b><U>Note:</U></b> To add records in DEPT table , Please enter the data in below fields and click ADD ROW button.</p>
 				
-				Department ID:	<input type="text" name="deptid" id="deptid" /><br/>
-				Department Name:<input type="text" name="deptname" id="deptname" /><br/>
-				Manager ID:		<input type="text" name="mgid" id="mgid" /><br/><br/>
-				Location ID:	<input type="text" name="lcid" id="lcid" /><br/><br/>
+				<div class="column">
+				<b><p style="font-family:courier;text-align:left;width:50%;color:navy;font-size:90%;">				
+				
+				Department ID:	<input size="25" type="text" name="deptid" value="" placeholder="Enter Department Number" id="deptid" /><br/>
+				Department Name:<input size="25" type="text" name="deptname" value="" placeholder="Enter Department Name" id="deptname" /><br/>
+				Manager ID:		<input size="25" type="text" name="mgid" value="" placeholder="Enter Manager ID" id="mgid" /><br/>
+				Location ID:	<input size="25" type="text" name="lcid" value="" placeholder="Enter Location Number" id="lcid" /><br/><br/>
 				
 				<input type="submit" name="addrowdept" value="ADD ROW" onclick="AddRowDept()" /></p>
+				</div>
 				
 				<table  id="myTableDept" align="right" style="width:70%">
 				
@@ -152,12 +182,20 @@
 					<%}%>
 				</table>
 				
-				<h4>Table List:</h4>
-				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />
+				<table><tr><th style="background-color: gold;color: olivedrab;">
+				<h4 style="background-color:powderblue;color:red;">Table List:</h4> 
+				<h4 style="color:indigo;">Please select one table ,</h4>
+				<h4 style="color:indigo;">before clicking on below buttons.</h4>
+				<h5 style="color:orangered;">Please select one table at a time.</h5>
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
-				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Insert Data into Table" name="insrt"/>
+				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />				
+				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />				
+				<input type = "submit" value = "View Records"  /><br /><br />				
+				<input type="submit" value="Insert Records" name="insrt"/><br /><br />
+				<form action="index.jsp">
+					<input type="submit" value="HOME" />
+				</form><br /><br />
+				</th></tr></table>
 
 			<%} %><%--End Department CheckBox Code--%>
 
@@ -167,18 +205,26 @@
 			if (managersdata != null)
 			{%>				
 					<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-					Query Used To Insert Data into Table:</p>
+					<b><U>Query Used To Insert Data into Table:</U></b></p>
 				
-					<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
+					<p style="font-family:courier;background-color:maroon;color:ivory;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
 					Insert into managers (MNGRID,DEPTNAME,SALARY) values(value of column1,value of column2,value of column3);</p>
 					
-					<p style="display: inline-block;font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
+					<p style="font-family:courier;font-size:94%;background-color:wheat;border-color: #1E90FF #FF0000;border-style:dotted; float:right;width:68%;color:darkgreen">
+					<b><U>Note:</U></b> To add records in MANAGERS table , Please enter the data in below fields and click ADD ROW button.</p>
+				
+					<div class="column">
+						<b><p style="font-family:courier;text-align:left;width:50%;color:navy;font-size:90%;">
 					
-		Manager ID:<input type="text" name="managerid" id="managerid" /><br />
-					Department Name:<input type="text" name="deptname" id="deptname" /><br />
-							 Salary:<input type="text" name="salary" id="salary" /><br /><br />
+					<label for="enum">Manager ID:</label>
+					<input size="25" type="text" name="managerid" value="" placeholder="Enter Manager ID" id="managerid" /><br />
+					<label for="enum">Department Name:</label>
+					<input size="25" type="text" name="deptname" value="" placeholder="Enter Department Name" id="deptname" /><br />
+					<label for="enum">Salary:</label><br />
+					<input size="25" type="text" name="salary" value="" placeholder="Enter Salary" id="salary" /><br /><br />
 					
 					<input type="submit" name="addrowmngr" value="ADD ROW" onclick="AddRow()" /></p>
+					</div>
 					
 					<table  id="myTableMang" align="right" style="width:70%"> 
 				
@@ -197,17 +243,22 @@
 					</table>
 						
 					
-				<h4>Table List:</h4>
-				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />
-				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
-				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-				<input type = "submit" value = "Show Table Data" /><br /><br />				
-				<input type="submit" value="Insert Data into Table" name="insrt"/>	
+				<table><tr><th style="background-color: gold;color: olivedrab;">
+				<h4 style="background-color:powderblue;color:red;">Table List:</h4> 
+				<h4 style="color:indigo;">Please select one table ,</h4>
+				<h4 style="color:indigo;">before clicking on below buttons.</h4>
+				<h5 style="color:orangered;">Please select one table at a time.</h5>
+				<input type = "checkbox"  value="deptdata" 		name="dept" />DEPT<br />
+				<input type = "checkbox"  value="empdata" 		name="emp" />EMP<br />				
+				<input type = "checkbox"  value="managerdata" 	name="managers" />MANAGERS<br /><br />				
+				<input type = "submit"    value = "View Records"  /><br /><br />				
+				<input type = "submit" 	  value="Insert Records"name="insrt"/><br /><br />
+				<form action="index.jsp">
+					<input type="submit" value="HOME" />
+				</form><br /><br />
+				</th></tr></table>	
+				
 			<%} %><%--End Managers CheckBox Code--%>
-		</form><br />
-		<form action="index.jsp">
-			<input type="submit" value="HOME" />
-		</form>
-		
+		</form><br />		
 	</body>
 </html>
