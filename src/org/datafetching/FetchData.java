@@ -26,8 +26,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	    ArrayList dataList = new ArrayList();
 	    
 	    String valueemp = request.getParameter("empid_edt");
-	    String valuedept = request.getParameter("deptid");
-	    String valuemngr = request.getParameter("mgid");
+	    String valuedept = request.getParameter("deptid_edt");
+	    String valuemngr = request.getParameter("mgid_edt");
 	    
 	    try {
 	    	Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -37,6 +37,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	        PreparedStatement ps1=null;
 	        
 	        System.out.println("\n I am at 38 for value is: "+valueemp);
+	        System.out.println("\n I am at 38 for value is: "+valuedept);
+	        System.out.println("\n I am at 38 for value is: "+valuemngr);
 	        
 	        if (valueemp != null) 
 	        {    	        
@@ -60,36 +62,42 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	        }
 	        if (valuedept != null) 
 	        {    	        
-	        System.out.println("\n I am inside valuedept at not null where value is: "+valuedept);
-	        //st.executeUpdate("Delete From dept_new  where DEPARTMENT_ID =" + valuedept);
-	        
-	        response.setContentType("text/html");
-			System.out.println("\n I am @ line 63 in deleteData.java");
-			PrintWriter pw1=response.getWriter();				
-			pw1.println("<script type=\"text/javascript\">");
-			pw1.println("alert('Records deleted successfully!');");
-			pw1.println("</script>");
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
-			rd.include(request, response);
-			
-	        //out.print(valuedept);
-	        //response.sendRedirect("http://localhost:8080/How_to_fetch_data_from_oracle/index.jsp");
+	        	System.out.println("\n I am inside FetchData.java where valuedept is: "+valuedept);
+		        ps1=conn.prepareStatement("select * from dept where department_id=" + valuedept);
+		        //st.executeQuery("select * from emp WHERE empid=" + valueemp);
+		        
+		        ResultSet rs1=ps1.executeQuery();
+				while (rs1.next()) 
+				{
+					//Add records into data list
+					dataList.add(rs1.getString(1));
+					dataList.add(rs1.getString(2));
+					dataList.add(rs1.getString(3));
+					dataList.add(rs1.getString(4));
+				}//while loop rs1 closed here
+				
+				request.setAttribute("deptdata", dataList);				  
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/editDataNew.jsp") ;							
+				dispatcher.forward(request,response);
 	        }
 	        if (valuemngr != null) 
 	        {    	        
-	        System.out.println("\n I am inside value at not null where value is: "+valuemngr);
-	        //st.executeUpdate("DELETE FROM managers WHERE MNGRID=" + valuemngr);
-	        //out.print(valuemngr);
-	        //response.sendRedirect("http://localhost:8080/How_to_fetch_data_from_oracle/index.jsp");
-	        
-	        response.setContentType("text/html");
-			System.out.println("\n I am @ line 81 in deleteData.java");
-			PrintWriter pw1=response.getWriter();				
-			pw1.println("<script type=\"text/javascript\">");
-			pw1.println("alert('Records deleted successfully!');");
-			pw1.println("</script>");
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
-			rd.include(request, response);
+	        	System.out.println("\n I am inside FetchData.java where valuemngr is: "+valuemngr);
+		        ps1=conn.prepareStatement("select * from managers where mngrid=" + valuemngr);
+		        //st.executeQuery("select * from emp WHERE empid=" + valueemp);
+		        
+		        ResultSet rs1=ps1.executeQuery();
+				while (rs1.next()) 
+				{
+					//Add records into data list
+					dataList.add(rs1.getString(1));
+					dataList.add(rs1.getString(2));
+					dataList.add(rs1.getString(3));
+				}//while loop rs1 closed here
+				
+				request.setAttribute("managersdata", dataList);				  
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/editDataNew.jsp") ;							
+				dispatcher.forward(request,response);
 	        }
 
 	        conn.close();
@@ -132,9 +140,17 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			//------------- update_reocrd.jsp-----------------------
 			String editdata=request.getParameter("updte");			
 			String editbutton = request.getParameter("editbutton");
+			String editbuttondept = request.getParameter("editbuttondept");
+			String editbuttonmngr = request.getParameter("editbuttonmngr");
 			String sal_edt = request.getParameter("sal_edt");
 	        String empid_edt = request.getParameter("empid_edt");  
-	        String empname_edt = request.getParameter("empname_edt");
+	        String empname_edt = request.getParameter("empname_edt");	        
+	        String managerid_edt = request.getParameter("managerid_edt");  
+	        String deptname_edt = request.getParameter("deptname_edt");  
+	        String salary_edt = request.getParameter("salary_edt");	        
+	        String deptid_edt = request.getParameter("deptid_edt");	          
+	        String mgid_edt = request.getParameter("mgid_edt");	 
+	        String lcid_edt = request.getParameter("lcid_edt");
 			//------------- update_reocrd.jsp-----------------------
 			//------------- insertdata.jsp-----------------------			
 			String insertdata=request.getParameter("insrt");
@@ -185,7 +201,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			
 			if (truncdata == null && insertdata == null && deletedata == null && editdata == null 
 					&& editbutton == null && createtable == null && createtablequery == null
-					&& droptable == null)
+					&& droptable == null && editbuttondept == null && editbuttonmngr == null)
 			{
 				if (cstdata != null)
 				{
@@ -193,11 +209,16 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					//al.add("DEPT");
 					//al.add("MANAGERS");
 					System.out.println("\n Before Query");
+					/*
 					ps1=conn.prepareStatement(" select table_name from all_tables where table_name IN ('EMP','DEPT','MANAGERS') and OWNER ='HR'\r\n" + 
 							"Union\r\n" + 
 							"select object_name from all_objects where trunc(created)>= '19-jul-2020' \r\n" + 
 							"and owner = 'HR' and object_type = 'TABLE' \r\n" + 
 							"order by table_name asc");
+					*/		
+					ps1=conn.prepareStatement(" select table_name from all_tables where table_name IN ('EMP','DEPT','MANAGERS','TESTERDATA') and OWNER ='HR'\r\n" + 
+							"order by table_name asc");		
+					
 					System.out.println("\n After Query");
 					ResultSet rs3=ps1.executeQuery();
 					System.out.println("\n After execute query");
@@ -282,7 +303,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 							if(deptdata.length > 0)
 							{//If checkbox is checked than assign it with true or 1       
 								System.out.println("\nand the chkSms is: " +deptdata);
-								ps2=conn.prepareStatement("select * from dept_new order by department_id");
+								ps2=conn.prepareStatement("select * from dept order by department_id");
 								Flag = 1;
 								deptFlag =1;
 							}
@@ -322,7 +343,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					System.out.println("\nand the truncallmngrrecord is: " +truncallmngrrecord);
 					if (((emptable == null) && (depttable == null) && (managerstable == null)) && tableFlag == 0 
 							&& truncallmngrrecord == null && truncalldeptrecord == null && truncallemprecord == null 
-							&& addrowemp == null && addrowdept == null && addrowmngr == null 
+							&& addrowemp == null && addrowdept == null && addrowmngr == null && droptable == null
 							&& droptableemp == null && droptabledept == null && droptablemngr == null)
 					{
 						response.setContentType("text/html");
@@ -459,7 +480,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					
 								if(deptdata.length > 0)
 								{//If checkbox is checked than assign it with true or 1									
-									ps2=conn.prepareStatement("select * from dept_new order by department_id");
+									ps2=conn.prepareStatement("select * from dept order by department_id");
 									Flag = 1;
 									deptFlag =1;
 								}
@@ -619,7 +640,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			if (truncalldeptrecord != null)
 			{
 				System.out.println("\nI am here in truncalldeptrecord");				
-				PreparedStatement ps4=conn.prepareStatement("truncate table dept_new");
+				PreparedStatement ps4=conn.prepareStatement("truncate table dept");
 				ResultSet rs4=ps4.executeQuery();
 				response.setContentType("text/html");
 				System.out.println("\n I am @ line 467 Inside");
@@ -661,7 +682,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			if (droptabledept != null)
 			{
 				System.out.println("\nI am here in droptableemp");				
-				PreparedStatement ps4=conn.prepareStatement("drop table dept_new");
+				PreparedStatement ps4=conn.prepareStatement("drop table dept");
 				ResultSet rs4=ps4.executeQuery();
 				response.setContentType("text/html");
 				System.out.println("\n I am @ line 583 Inside");
@@ -737,7 +758,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					
 								if(deptdata.length > 0)
 								{//If checkbox is checked than assign it with true or 1									
-									ps2=conn.prepareStatement("select * from dept_new order by department_id");
+									ps2=conn.prepareStatement("select * from dept order by department_id");
 									Flag = 1;
 									deptFlag =1;
 								}
@@ -915,7 +936,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				else
 				{
 					System.out.println("\n Inside addrowdept record");				
-					ps2=conn.prepareStatement("Insert into dept_new (DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID) values(?,?,?,?)");
+					ps2=conn.prepareStatement("Insert into dept (DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID) values(?,?,?,?)");
 					ps2.setString(1,deptid);  
 			        ps2.setString(2,deptname);        
 			        ps2.setString(3,mgid);
@@ -1022,7 +1043,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					
 								if(deptdata.length > 0)
 								{//If checkbox is checked than assign it with true or 1									
-									ps2=conn.prepareStatement("select * from dept_new order by department_id");
+									ps2=conn.prepareStatement("select * from dept order by department_id");
 									Flag = 1;
 									deptFlag =1;
 								}
@@ -1110,10 +1131,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 										dataList.add(rs3.getString(1));
 										dataList.add(rs3.getString(2));
 										dataList.add(rs3.getString(3));													
-									}// while rs3 closed here
-									
-								}// managerstable != null closed here
-				
+									}// while rs3 closed here									
+								}// managerstable != null closed here				
 								//out.println("</table></center></body></html>");
 								if (managersFlag ==1)
 								{
@@ -1176,10 +1195,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		        ps2.executeUpdate();	        
 				System.out.println("\n And empid is : "+empid_edt);
 				System.out.println("\n And empname is : "+empname_edt);
-				System.out.println("\n And sal is : "+sal_edt);
-				//System.out.println("\n And ps2.executeUpdate() is : "+ps2.executeUpdate());
-				//System.out.println("\n And ps2.toString() is : "+ps2.toString());
-				//int i=ps2.executeUpdate();
+				System.out.println("\n And sal is : "+sal_edt);				
 				response.setContentType("text/html");
 				System.out.println("\n I am @ line 1103 Inside");
 				PrintWriter pw1=response.getWriter();				
@@ -1189,7 +1205,48 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
 				rd.include(request, response);
 				}// End of editbutton EMP table
-			
+			if (editbuttondept != null) 
+			{
+				String sql = "update DEPT set DEPARTMENT_NAME=?,MANAGER_ID=?,LOCATION_ID=? where DEPARTMENT_ID=? ";						
+				ps2=conn.prepareStatement(sql);
+				ps2.setString(1,deptname_edt);        
+		        ps2.setString(2,mgid_edt);
+		        ps2.setString(3,lcid_edt);
+		        ps2.setString(4,deptid_edt);
+		        ps2.executeUpdate();	        
+				System.out.println("\n And deptid_edt is : "+deptid_edt);
+				System.out.println("\n And deptname_edt is : "+deptname_edt);
+				System.out.println("\n And mgid_edt is : "+mgid_edt);
+				System.out.println("\n And lcid_edt is : "+lcid_edt);
+				response.setContentType("text/html");
+				System.out.println("\n I am @ line 1217 Inside");
+				PrintWriter pw1=response.getWriter();				
+				pw1.println("<script type=\"text/javascript\">");
+				pw1.println("alert('Records Updated successfully!');");
+				pw1.println("</script>");
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+				rd.include(request, response);
+				}// End of editbutton EMP table
+			if (editbuttonmngr != null) 
+			{
+				String sql = "update MANAGERS set DEPTNAME=?,SALARY=? where MNGRID=? ";						
+				ps2=conn.prepareStatement(sql);
+				ps2.setString(1,deptname_edt);        
+		        ps2.setString(2,salary_edt);
+		        ps2.setString(3,managerid_edt);
+		        ps2.executeUpdate();	        
+				System.out.println("\n And managerid_edt is : "+managerid_edt);
+				System.out.println("\n And deptname_edt is : "+deptname_edt);
+				System.out.println("\n And salary_edt is : "+salary_edt);				
+				response.setContentType("text/html");
+				System.out.println("\n I am @ line 1237 Inside");
+				PrintWriter pw1=response.getWriter();				
+				pw1.println("<script type=\"text/javascript\">");
+				pw1.println("alert('Records Updated successfully!');");
+				pw1.println("</script>");
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");				
+				rd.include(request, response);
+				}// End of editbutton EMP table
 			//Start of createtable
 			if (createtablequery != null) 
 			{

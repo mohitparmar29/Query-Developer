@@ -9,7 +9,7 @@
 <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="functions.js"></script>
 </head>
-<body bgcolor="#E6E6FA"'>
+<body bgcolor="#a3ddc4"'>
 		<style>
 			table, th, td
 			{
@@ -26,7 +26,7 @@
 			}
 			table
 			{
-  				background-color: #F5FFFA;
+  				background-color: #FFDEAD;
 			}
 		</style>
 		
@@ -48,15 +48,17 @@
 			if (empdata != null) 
 			{%>
 				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-				Query Used To update Data in Table:</p>
+				<b><U>Query Used To update Data in Table:</U></b></p>
 			
-				<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
+				<p style="font-family:courier;background-color:maroon;color:ivory;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
 				update EMP set empname=value of empname,salary=value of salary where EMPID = value of empid;</p>
-								
+				
+				<p style="font-family:courier;font-size:94%;background-color:wheat;border-color: #1E90FF #FF0000;border-style:dotted; float:right;width:68%;color:darkgreen">
+				<b><U>Note:</U></b> To update records in EMP table , Please click on edit button.</p>							
 												
 				<table  id="myTableEmp" align="right" style="width:70%">
 				
-					<tr><th>EMPLOYEE NUMBER</th><th>EMPLOYEE NAME</th><th>SALARY</th></tr>
+					<tr><th>EMPLOYEE NUMBER</th><th>EMPLOYEE NAME</th><th>SALARY</th><th>EDIT</th></tr>
 					<%
 					Iterator itr = empdata.iterator();
 					
@@ -78,14 +80,19 @@
 				<p style="font-family:courier;color:orange red;font-size:110%;float:right;width:60%;">
 					-------------No DATA Found-----------</p>	
 				<%}%>
-				<table>
-				<tr><th style="background-color: gold;color: olivedrab;">
-				<h4>Table List:</h4>
-				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />
+				<table><tr><th style="background-color: gold;color: olivedrab;">
+				<h4 style="background-color:powderblue;color:red;">Table List:</h4> 
+				<h4 style="color:indigo;">Please select one table ,</h4>
+				<h4 style="color:indigo;">before clicking on below buttons.</h4>
+				<h5 style="color:orangered;">Please select one table at a time.</h5>
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
+				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />				
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-				<input type = "submit" value = "Show Table Data" /><br /><br />				
-				<input type="submit" value="Update Data In Table" name="updte"/>
+				<input type = "submit" value = "View Records"  /><br /><br />				
+				<input type="submit" value="Modify Records" name="updte" /><br /><br />
+				<form action="index.jsp">
+					<input type="submit" value="HOME" />
+				</form><br /><br />
 				</th></tr></table>
 
 			<%}%> <%--End EMP CheckBox Code--%>
@@ -95,24 +102,30 @@
 			if (deptdata != null) 
 			{%>
 				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-				Query Used To Delete Data from Table:</p>
+				<b><U>Query Used To update Data in Table:</U></b></p>
 			
-				<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
-				Delete From dept_new  where DEPARTMENT_ID = value of deptid;</p>
+				<p style="font-family:courier;background-color:maroon;color:ivory;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
+				Update dept set department_name=value of department_name,manager_id=value of manager_id,location_id=value of location_id where department_id=value of department_id;</p>
+				
+				<p style="font-family:courier;font-size:94%;background-color:wheat;border-color: #1E90FF #FF0000;border-style:dotted; float:right;width:68%;color:darkgreen">
+				<b><U>Note:</U></b> To update records in DEPT table , Please click on edit button.</p>
 				
 				<table  id="myTableDept" align="right" style="width:70%">
 				
-					<tr><th>Department ID</th><th>Depatment Name</th><th>Manager ID</th><th>Location ID</th><th>Delete Rows</th></tr>
-					<% Iterator itr;
-					for (itr=deptdata.iterator(); itr.hasNext(); )
-					{%>
+					<tr><th>Department ID</th><th>Depatment Name</th><th>Manager ID</th><th>Location ID</th><th>Edit</th></tr>
+					<% 
+					Iterator itr = deptdata.iterator();					
+					while (itr.hasNext())
+					{
+					 	String deptid = (String)itr.next();
+					 	%>
 						<tr>
-							<td width="140"><%=itr.next()%></td>
-							<td width="180"><%=itr.next()%></td>
-							<td width="168"><%=itr.next()%></td>
-							<td width="168"><%=itr.next()%></td>
-							<td><a href=deleteData?deptid=<%=deptdata.get(0) %>> Delete </a></td>
-						</tr>
+							<td><%=deptid%></td>
+							<td><%=itr.next()%></td>
+							<td><%=itr.next()%></td>
+							<td><%=itr.next()%></td>
+							<td><a href=FetchData?deptid_edt=<%=deptid%>> Edit </a></td>					
+						</tr>						
 					<%}%>
 				</table>
 				<%if (deptdata.isEmpty() == true) 
@@ -121,12 +134,20 @@
 					-------------No DATA Found-----------</p>	
 				<%}%>
 				
-				<h4>Table List:</h4>
-				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />
+				<table><tr><th style="background-color: gold;color: olivedrab;">
+				<h4 style="background-color:powderblue;color:red;">Table List:</h4> 
+				<h4 style="color:indigo;">Please select one table ,</h4>
+				<h4 style="color:indigo;">before clicking on below buttons.</h4>
+				<h5 style="color:orangered;">Please select one table at a time.</h5>
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
+				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />				
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-				<input type = "submit" value = "Show Table Data" /><br /><br />
-				<input type="submit" value="Delete Data From Table" name="delte"/>
+				<input type = "submit" value = "View Records"  /><br /><br />				
+				<input type="submit" value="Modify Records" name="updte" /><br /><br />
+				<form action="index.jsp">
+					<input type="submit" value="HOME" />
+				</form><br /><br />
+				</th></tr></table>
 
 			<%} %><%--End Department CheckBox Code--%>
 
@@ -135,43 +156,55 @@
 				//out.println(managerdata);
 			if (managersdata != null)
 			{%>				
-					<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
-					Query Used To Delete Data From Table:</p>
-				
-					<p style="font-family:courier;color:orange red;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
-					Delete from managers where managerid = value of managerid;</p>					
+				<p style="font-family:courier;float:right;width:70%;color:crimson;font-size:80%;">
+				<b><U>Query Used To update Data in Table:</U></b></p>
 			
+				<p style="font-family:courier;background-color:maroon;color:ivory;font-size:80%;border-color: #FF0000 #00FF00;border-style:inset; float:right;width:50%;">
+				Update managers set department_name=value of department_name,salary=value of salary where manager_id=value of manager_id;</p>
+				
+				<p style="font-family:courier;font-size:94%;background-color:wheat;border-color: #1E90FF #FF0000;border-style:dotted; float:right;width:68%;color:darkgreen">
+					<b><U>Note:</U></b> To update records in Managers table , Please click on edit button.</p>
+									
 					<table  id="myTableMang" align="right" style="width:70%"> 
 				
-						<tr><th>Manager ID</th><th>Depatment Name</th><th>Salary</th><th>Delete Rows</th></tr>
-					
-						<%Iterator itr;
-						for (itr=managersdata.iterator(); itr.hasNext(); )
+						<tr><th>Manager ID</th><th>Depatment Name</th><th>Salary</th><th>Edit</th></tr>
+						<%
+						Iterator itr = managersdata.iterator();					
+						while (itr.hasNext())
 						{
-						%>
+						 	String mgid = (String)itr.next();
+						 	%>
 							<tr>
-								<td width="150"><%=itr.next()%></td>							
-								<td width="170"><%=itr.next()%></td>									
-								<td width="150"><%=itr.next()%></td>
-								<td><a href=deleteData?mgid=<%=managersdata.get(0) %>> Delete </a></td>								
-							</tr>
+								<td><%=mgid%></td>
+								<td><%=itr.next()%></td>
+								<td><%=itr.next()%></td>
+								<td><a href=FetchData?mgid_edt=<%=mgid%>> Edit </a></td>					
+							</tr>						
 						<%}%>					
 					</table>
 					<%if (managersdata.isEmpty() == true) 
 					{%>
 						<p style="font-family:courier;color:orange red;font-size:110%;float:right;width:60%;">
 							-------------No DATA Found-----------</p>	
-					<%}%>
-						
+					<%}%>						
 					
-				<h4>Table List:</h4>
-				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />
+				<table><tr><th style="background-color: gold;color: olivedrab;">
+				<h4 style="background-color:powderblue;color:red;">Table List:</h4> 
+				<h4 style="color:indigo;">Please select one table ,</h4>
+				<h4 style="color:indigo;">before clicking on below buttons.</h4>
+				<h5 style="color:orangered;">Please select one table at a time.</h5>
 				<input type = "checkbox"  value="deptdata" name="dept" />DEPT<br />
+				<input type = "checkbox"  value="empdata" name="emp" />EMP<br />				
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />
-				<input type = "submit" value = "Show Table Data" /><br /><br />				
-				<input type="submit" value="Delete Data From Table" name="delte"/>	
+				<input type = "submit" value = "View Records"  /><br /><br />				
+				<input type="submit" value="Modify Records" name="updte" /><br /><br />
+				<form action="index.jsp">
+					<input type="submit" value="HOME" />
+				</form><br /><br />
+				</th></tr></table>	
 			<%} %><%--End Managers CheckBox Code--%>
 		</form>
+		<%-- 
 		<script>				
 				var table = document.getElementById("myTableEmp"),rIndex;
 				
@@ -195,11 +228,6 @@
 					table.rows[rIndex].cells[1].innerHTML = document.getElementById("empname_edt").value;
 					table.rows[rIndex].cells[2].innerHTML = document.getElementById("sal_edt").value;
 				}
-				</script>
-		
-		<form action="index.jsp">
-			<input type="submit" value="HOME" />
-		</form>
-		
+				</script>	--%>	
 	</body>
 </html>

@@ -50,7 +50,7 @@
 				<input type="submit" value="Insert Records" name="insrt" /><br /><br />
 				<input type="submit" value="Modify Records" name="updte" /><br /><br />
 				<input type="submit" value="Delete Records" name="delte" /><br /><br />				
-				<input type="submit" value="Drop Table" name="dropt" /><br /><br />				
+				<input type="submit" value="Drop Table" name="dropt" onclick="basetabledrop();"/><br /><br />				
 		</form>									
 			<%}%>	
 		<script>	
@@ -66,6 +66,17 @@
                 }
               //  return isEmpty;
             }
+		function basetabledrop()
+        {
+            var isEmpty = false;                
+        
+            if (document.getElementById("deptid").checked == true || document.getElementById("empid").checked == true 
+            		|| document.getElementById("mgid").checked == true){
+                alert("As it is a Base Table.You won't able to drop it.Please select table which is created by you.");
+                
+            }
+            return isEmpty;
+        }
             </script>
 		
 		<form action="CreateTable.jsp">

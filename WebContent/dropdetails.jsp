@@ -185,9 +185,6 @@
 				</th></tr></table>
 					
 			<%} %><%--End Managers CheckBox Code--%>
-		</form><br />
-		<form action="index.jsp">
-			<input type="submit" value="HOME" />
-		</form>
+		</form><br />		
 	</body>
 </html>

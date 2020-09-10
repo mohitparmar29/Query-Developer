@@ -8,10 +8,28 @@
 <style>            
   .container{overflow: hidden}
   .tab{float: left;}
-  .tab-2{margin-left: 60px}
-  .tab-3{margin-left: 60px}
-  .tab-1 input{display: block;margin-bottom: 10px;width: 32.33%;}
-  .vl {border: 20px solid brown;height: 450px;}
+  .tab-2{margin-left: 50px}
+  .tab-3{margin-left: 50px}
+  .tab-1{margin-left: 10px}
+  .tab-1 input{display: block;margin-bottom: 10px;}
+  .vl {border: 10px dotted tomato;height: 450px;}
+  .vertical { 
+            border-left: 10px dotted tomato; 
+            height: 280px; 
+            position:absolute; 
+            left: 28%; 
+        }
+   .verticalnew { 
+            border-left: 10px dotted tomato; 
+            height: 280px; 
+            position:absolute; 
+            left: 60%; 
+        }      
+        /* Rounded border */
+hr.rounded {
+  border-top: 8px dotted tomato;
+  border-radius: 5px;
+}
  </style>
 </head>
 <body bgcolor="wheat">
@@ -23,23 +41,24 @@
 			<input type="submit" value="HOME" />
 		</form><br /><br />
 		<div class="vl">	
-			<p style="border-style:dotted solid;float:center;border-color: #800080 #800080;width:15%;font-family:courier;color:maroon;font-size:120%;">STEP -1</p>
-			<h4 style="color:blue;">Enter the Table Name:<input type="text" id="tablename"/></h4><br />
-		<hr>		
+			<p style="border-style:dotted solid;margin-left: 10px;float:center;border-color: #800080 #800080;width:15%;font-family:courier;color:maroon;font-size:120%;">STEP -1</p>
+			<h4 style="color:darkolivegreen;margin-left: 10px;font-size:140%;">Enter the Table Name : <input size="35" type="text" id="tablename" value="" placeholder="Ex. Employee"/></h4><br />
+		<hr class="rounded">		
 		<div class="container">						
             <div class="tab tab-1">
             	<p style="border-style:dotted solid;border-color: #800080 #800080;width:55%;font-family:courier;color:maroon;font-size:120%;">STEP -2</p><br/>
-                Column Name :<input type="text" id="column_id" name="column_id">
-                Data Type :<select name="datatypes" id="datatype_id" name="datatype_id"><br />
+                Column Name :<input size="25" type="text" id="column_id" name="column_id" value="" placeholder="Ex. Employee Id" />
+                Data Type :<br /><select name="datatypes" id="datatype_id" name="datatype_id"><br />
         						<option value="number">number</option>
         						<option value="varchar2">varchar2</option>        		
-    						</select><br />
-                Size :<input type="text" id="size_id" name="size_id">
+    						</select><br /><br />
+                Size :<input size="10" type="text" id="size_id" name="size_id" value="" placeholder="Ex. 10" />
                 
                 <button onclick="addHtmlTableRow();">Add</button>
               <%--  <button onclick="editHtmlTbleSelectedRow();">Edit</button>
                 <button onclick="removeSelectedRow();">Remove</button>  --%>  
             </div>
+            <div class = "vertical"></div>
             
             <div class="tab tab-2">
             	<p style="border-style:dotted solid;border-color: #800080 #800080;width:40%;font-family:courier;color:maroon;font-size:120%;">STEP -3</p><br/>
@@ -49,6 +68,8 @@
                 <input type="submit" value="Generate Query" name="gnrtq" onclick="Createtablequery();"/>
                 <input type="submit" value="Clear Table" name="clearT" onclick="ClearTable();"/><br /><br />
             </div>
+            
+            <div class = "verticalnew"></div>
             
             <div class="tab tab-3">
             	<p style="border-style:dotted solid;border-color: #800080 #800080;width:40%;font-family:courier;color:maroon;font-size:120%;">STEP -4</p><br />

@@ -91,6 +91,7 @@
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />				
 				<input type = "submit" value = "View Records"  /><br /><br />
 				<input type="submit" value="Truncate Table" name="trunc" /><br /><br />					
+				</form>
 				<form action="index.jsp">
 					<input type="submit" value="HOME" />
 				</form> 
@@ -147,6 +148,7 @@
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />				
 				<input type = "submit" value = "View Records"  /><br /><br />
 				<input type="submit" value="Truncate Table" name="trunc" /><br /><br />					
+				</form>
 				<form action="index.jsp">
 					<input type="submit" value="HOME" />
 				</form> 
@@ -203,11 +205,12 @@
 				<input type = "checkbox"  value="managerdata" name="managers" />MANAGERS<br /><br />				
 				<input type = "submit" value = "View Records"  /><br /><br />
 				<input type="submit" value="Truncate Table" name="trunc" /><br /><br />					
+				</form>
 				<form action="index.jsp">
 					<input type="submit" value="HOME" />
 				</form> 
 				</th></tr></table>	
 			<%} %><%--End Managers CheckBox Code--%>
-		</form><br />		
+	<%-- 	</form><br />--%>		
 	</body>
 </html>
